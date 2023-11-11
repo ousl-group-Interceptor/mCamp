@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-public class common {
+public class Common {
 
     private static ProgressDialog progressDialog;
     public static String description, server, rDBEmail, dataID, AlarmName, taskName, taskDescription, startTime, notifyTime, link;
@@ -160,7 +160,7 @@ public class common {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         boolean r = activeNetworkInfo != null && activeNetworkInfo.isConnected();
         if (!r) {
-            common.stopLoading();
+            Common.stopLoading();
             Toast.makeText(context, "No internet connection available", Toast.LENGTH_LONG).show();
         }
         return r;

@@ -1,66 +1,26 @@
 {
   "project_info": {
-    "project_number": "533018393347",
-    "firebase_url": "https://planet-d-deab8-default-rtdb.firebaseio.com",
-    "project_id": "planet-d-deab8",
-    "storage_bucket": "planet-d-deab8.appspot.com"
+    "project_number": "856712960461",
+    "project_id": "mcamp-573ee",
+    "storage_bucket": "mcamp-573ee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:533018393347:android:ee2074df598f6b66418736",
+        "mobilesdk_app_id": "1:856712960461:android:5eb4f973eb0d19aed38c84",
         "android_client_info": {
           "package_name": "com.interceptor.mcamp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "533018393347-vbg9kk2d5hepepod276rmuvh35kn0jvi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCCJ93yMC_pfcQISSC--BY0-96Kyuie_TQ"
+          "current_key": "AIzaSyDoc0t1MqCjzI5wvoR6pFIFXi7Q4CrguIg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "533018393347-vbg9kk2d5hepepod276rmuvh35kn0jvi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:533018393347:android:4177a73af1805321418736",
-        "android_client_info": {
-          "package_name": "com.interceptor.planetd"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "533018393347-vbg9kk2d5hepepod276rmuvh35kn0jvi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCCJ93yMC_pfcQISSC--BY0-96Kyuie_TQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "533018393347-vbg9kk2d5hepepod276rmuvh35kn0jvi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
