@@ -17,183 +17,193 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/header"
         app:menu="@menu/menu_menu"
-        >
+        tools:ignore="VisualLintBounds">
 
     </com.google.android.material.navigation.NavigationView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_back">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/home_back">
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout4"
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"/>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:layout_editor_absoluteX="57dp"
-                    tools:layout_editor_absoluteY="0dp">
+                    android:elevation="4dp"
+                    app:navigationIcon="@drawable/baseline_format_align_justify_24">
+                </androidx.appcompat.widget.Toolbar>
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="4dp"
-                        app:navigationIcon="@drawable/baseline_format_align_justify_24">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="10" />
 
-                    </androidx.appcompat.widget.Toolbar>
+                <TextView
+                    android:id="@+id/home_page"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="15"
+                    android:text="Home"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    tools:ignore="TextSizeCheck" />
 
-                    <TextView
-                        android:id="@+id/home_page"
-                        android:layout_width="256dp"
-                        android:layout_height="63dp"
-                        android:text="Home Page"
-                        android:textAlignment="center"
-                        android:textSize="34sp">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="6" />
 
-                    </TextView>
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/baseline_search_24"
+                    android:contentDescription="TODO" />
 
-                    <ImageView
-                        android:id="@+id/search"
-                        android:layout_width="44dp"
-                        android:layout_height="37dp"
-                        android:src="@drawable/baseline_search_24"></ImageView>
+                <ImageView
+                    android:id="@+id/setting"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/settings"
+                    android:contentDescription="TODO" />
 
-                    <ImageView
-                        android:id="@+id/setting"
-                        android:layout_width="43dp"
-                        android:layout_height="37dp"
-                        android:src="@drawable/settings"></ImageView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" >
-
-                    <TextView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="115dp"
-                        android:layout_marginTop="150dp"
-                        android:text="All Your Travel Plans In \nOne Application "
-                        android:textAlignment="textEnd"
-                        android:textSize="20sp"
-                        android:textStyle="bold"></TextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="7dp"
-                            android:layout_weight="1" />
-
-                        <Button
-                            android:id="@+id/home_button1"
-                            android:layout_width="0dp"
-                            android:layout_height="150dp"
-                            android:layout_weight="10"
-                            android:background="@drawable/round_style_home_button"
-                            android:text="Travel Places"
-                            android:textColorLink="@color/material_dynamic_neutral20"
-                            android:textSize="16sp"
-                            android:backgroundTint="#dfd2d2"
-                            android:textStyle="bold">
-
-                        </Button>
-
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="1" />
-
-                        <Button
-                            android:id="@+id/home_button2"
-                            android:layout_width="0dp"
-                            android:layout_height="150dp"
-                            android:layout_weight="10"
-                            android:background="@drawable/round_style_home_button"
-                            android:text="Accomodation Hotels"
-                            android:textColorLink="@color/material_dynamic_neutral20"
-                            android:textSize="16sp"
-                            android:textStyle="bold">
-
-                        </Button>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="1" />
-
-                        <Button
-                            android:id="@+id/home_button3"
-                            android:layout_width="0dp"
-                            android:layout_height="150dp"
-                            android:layout_weight="10"
-                            android:background="@drawable/round_style_home_button"
-                            android:text="Handy Crafts Suvinoirs"
-                            android:textColorLink="@color/material_dynamic_neutral20"
-                            android:textSize="16sp"
-                            android:textStyle="bold">
-
-                        </Button>
-
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="7dp"
-                            android:layout_weight="1" />
-
-                        <Button
-                            android:id="@+id/home_button4"
-                            android:layout_width="0dp"
-                            android:layout_height="150dp"
-                            android:layout_weight="10"
-                            android:background="@drawable/round_style_home_button"
-                            android:text="Travel Places"
-                            android:textColorLink="@color/material_dynamic_neutral20"
-                            android:textSize="16sp"
-                            android:textStyle="bold">
-
-                        </Button>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="7dp"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginTop="150dp"
+                android:text="All Your Travel Plans In \nOne Application "
+                android:textColor="@color/black"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1" />
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/home_button1"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/round_style_home_button"
+                        android:text="Travel Places"
+                        android:textColorLink="@color/material_dynamic_neutral20"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="VisualLintButtonSize">
+                    </Button>
+
+                    <Button
+                        android:id="@+id/home_button2"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="10"
+                        android:background="@drawable/round_style_home_button"
+                        android:text="Accomodation Hotels"
+                        android:textColorLink="@color/material_dynamic_neutral20"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="NestedWeights,VisualLintButtonSize">
+
+                    </Button>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/home_button3"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/round_style_home_button"
+                        android:text="Handy Crafts Suvinoirs"
+                        android:textColorLink="@color/material_dynamic_neutral20"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="VisualLintButtonSize">
+                    </Button>
+
+                    <Button
+                        android:id="@+id/home_button4"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="10"
+                        android:background="@drawable/round_style_home_button"
+                        android:text="Transpotation"
+                        android:textColorLink="@color/material_dynamic_neutral20"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="VisualLintButtonSize">
+
+                    </Button>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

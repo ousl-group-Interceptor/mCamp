@@ -13,6 +13,12 @@
         android:theme="@style/Theme.MCamp"
         tools:targetApi="31">
         <activity
+            android:name=".sign_up"
+            android:exported="false" />
+        <activity
+            android:name=".sign_in"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

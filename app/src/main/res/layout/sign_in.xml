@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sign_in">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sign_in_screen"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="Sign IN"
+            android:textSize="48sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_style"
+            android:backgroundTint="#CAD3D2"
+            android:hint="Enter your email"
+            android:inputType="textPersonName"
+            android:padding="120dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorHint="@color/black">
+
+        </EditText>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_style"
+            android:backgroundTint="#CAD3D2"
+            android:hint="Enter your password"
+            android:inputType="textPersonName"
+            android:padding="100dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black">
+
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="387dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/rememberMe"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="19dp"
+                android:text="Remember me"
+                android:textAlignment="center"
+                android:textColor="#131313" />
+
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="246dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:paddingStart="100dp"
+                android:text="Forget password"
+                android:textColor="#0E0E0E"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="242dp"
+            android:layout_height="71dp"
+            android:layout_margin="75dp"
+            android:background="@drawable/round_style"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="Sign IN">
+
+        </Button>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
