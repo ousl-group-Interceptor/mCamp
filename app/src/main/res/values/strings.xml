@@ -2,4 +2,6 @@
     <string name="app_name">mCamp</string>
     <string name="discription">Memory Camp</string>
     <string name="child_art">child_art</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
