@@ -4,4 +4,8 @@
     <string name="child_art">child_art</string>
     <string name="notificationbg">NotificationBG</string>
     <string name="notification">Notification</string>
+    <string name="date">date</string>
+    <string name="time">time</string>
+    <string name="name">name</string>
+    <string name="no_results_yet">No Results Yet</string>
 </resources>
