@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidUnknownAttribute -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home"
+            android:icon="@drawable/home"/>
+
+        <item
+            android:id="@+id/nav_start_task"
+            android:title="Start here"
+            android:icon="@drawable/baseline_star_24"/>
+
+        <item
+            android:id="@+id/nav_feedback"
+            android:title="Feedback"
+            android:icon="@drawable/baseline_add_comment_24"/>
+
+        <item
+            android:id="@+id/nav_faq"
+            android:title="FAQ"
+            android:icon="@drawable/question"/>
+
+
+    </group>
+
+
+
+    <item android:title="Profile" >
+
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_login"
+                    android:title="Login"
+                    android:icon="@drawable/login"/>
+
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="profile"
+                    android:icon="@drawable/baseline_person_24"/>
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="Logout"
+                    android:icon="@drawable/logout"/>
+            </group>
+        </menu>
+
+    </item>
+
+
+
+    <item android:title="communicate">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_share"
+                android:title="Share"
+                android:icon="@drawable/share"/>
+
+            <item
+                android:id="@+id/nav_rate"
+                android:title="Rate"
+                android:icon="@drawable/baseline_star_rate_24"/>
+
+
+        </menu>
+    </item>
+</menu>
+
+
