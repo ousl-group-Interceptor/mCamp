@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MCamp"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityWelcomeScreen"
+            android:exported="false" />
+        <activity
             android:name=".ActivityNotification"
             android:exported="false" />
         <activity
