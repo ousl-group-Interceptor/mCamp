@@ -2,30 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:orientation="vertical"
-    android:background="@drawable/x"
+    android:background="@drawable/background_welcome"
     android:gravity="bottom"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <ImageView
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/studylogo"/>
+        android:src="@drawable/baseline_question_mark_24" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:text="Smart study"
-        android:textSize="24sp" />
+        android:fontFamily="sans-serif"
+        android:text="mCamp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aclonica"
+        android:fontFamily="sans-serif"
         android:text="www.abc@gmail.com"
         android:textSize="14sp" />
-
 
 
 </LinearLayout>

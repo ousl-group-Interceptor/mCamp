@@ -12,19 +12,35 @@
             android:icon="@drawable/home"/>
 
         <item
-            android:id="@+id/nav_start_task"
-            android:title="Start here"
-            android:icon="@drawable/baseline_star_24"/>
-
-        <item
-            android:id="@+id/nav_feedback"
-            android:title="Feedback"
-            android:icon="@drawable/baseline_add_comment_24"/>
+            android:id="@+id/nav_notification"
+            android:title="Notification"
+            android:icon="@drawable/baseline_notifications_24"/>
 
         <item
             android:id="@+id/nav_faq"
             android:title="FAQ"
-            android:icon="@drawable/question"/>
+            android:icon="@drawable/baseline_question_mark_24"/>
+
+        <item
+            android:id="@+id/nav_setting"
+            android:title="Setting"
+            android:icon="@drawable/settings"/>
+
+        <item
+            android:id="@+id/nav_feedback"
+            android:title="Feedback"
+            android:icon="@drawable/baseline_feedback_24"/>
+
+        <item
+            android:id="@+id/nav_reviews"
+            android:title="Reviews"
+            android:icon="@drawable/baseline_reviews_24"/>
+
+        <item
+            android:id="@+id/nav_add_account"
+            android:title="ADD_Account"
+            android:icon="@drawable/baseline_add_24"/>
+
 
 
     </group>
@@ -36,15 +52,11 @@
 
         <menu>
             <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_login"
-                    android:title="Login"
-                    android:icon="@drawable/login"/>
 
                 <item
                     android:id="@+id/nav_profile"
                     android:title="profile"
-                    android:icon="@drawable/baseline_person_24"/>
+                    android:icon="@drawable/person"/>
 
                 <item
                     android:id="@+id/nav_logout"
