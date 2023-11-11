@@ -54,7 +54,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:contentDescription="@string/notificationbg"
-        android:paddingStart="3dp"
+        android:paddingStart="5dp"
         app:layout_constraintBottom_toBottomOf="@id/view"
         app:layout_constraintStart_toEndOf="@id/title"
         app:layout_constraintTop_toTopOf="@id/view"
