@@ -11,8 +11,13 @@ public class ActivitySplash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        if(!new SharedVariable(this).getUserID().equals("unknown")){
+            //navigate to home page
+        }
     }
 
     public void openWelcome(View view) {
+        //navigate to welcome page
     }
 }

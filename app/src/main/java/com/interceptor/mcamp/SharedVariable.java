@@ -13,16 +13,15 @@ public class SharedVariable {
         mContext = mainActivity;
     }
 
+    public SharedVariable(ActivitySplash activitySplash) {
+        mContext = activitySplash;
+    }
+
 
     public String getUserID() {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getString(KEY_USER_ID, "unknown");
     }
-
-//    public boolean getIsLogIn() {
-//        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-//        return prefs.getBoolean(KEY_IS_LOGIN, false);
-//    }
 
     public void setWhileLogin(String userID) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -30,6 +29,12 @@ public class SharedVariable {
         editor.putString(KEY_USER_ID, userID);
         editor.apply();
     }
+
+//    public boolean getNewUser() {
+//        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+//        return prefs.getBoolean(KEY_NEW_USER, true);
+//    }
+
 }
 
 //    SharedVariable sharedVariable = new SharedVariable(this);
