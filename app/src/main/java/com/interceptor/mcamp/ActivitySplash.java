@@ -1,5 +1,5 @@
 package com.interceptor.mcamp;
-
+//Done
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -16,13 +16,14 @@ public class ActivitySplash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if(!new SharedVariable(this).getUserID().equals("unknown")){
-            //navigate to home page
+            //navigate to home
+            startActivity(new Intent(this, ActivityHome.class));
         }
     }
 
     public void openWelcome(View view) {
         //navigate to welcome page
-        startActivity(new Intent(this, ActivityNotification.class));
+        startActivity(new Intent(this, ActivityWelcome.class));
     }
 
     @SuppressLint("MissingSuperCall")

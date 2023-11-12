@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="@drawable/sign_up_screen"
+    tools:context=".ActivitySignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/signUp"
+            android:textAlignment="center"
+            android:textColor="#263238"
+            android:textSize="48sp"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:boxStrokeWidth="0dp"
+            android:background="@drawable/round_style_input_filed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:ems="15"
+                android:hint="@string/enterYourName"
+                android:inputType="textEmailAddress"
+                tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:boxStrokeWidth="0dp"
+            android:background="@drawable/round_style_input_filed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:ems="15"
+                android:hint="@string/enterYourEmail"
+                android:inputType="textEmailAddress"
+                tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:boxStrokeWidth="0dp"
+            android:background="@drawable/round_style_input_filed"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:ems="15"
+                android:hint="@string/enterYourPassword"
+                android:inputType="textPassword"
+                android:password="true"
+                tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:boxStrokeWidth="0dp"
+            android:background="@drawable/round_style_input_filed"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:ems="15"
+                android:hint="@string/enterYourConfirmPassword"
+                android:inputType="textPassword"
+                android:password="true"
+                tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="15"
+                android:backgroundTint="#000000"
+                android:text="@string/signUp"
+                android:textSize="24sp"
+                tools:ignore="UsingOnClickInXml,VisualLintButtonSize,DuplicateSpeakableTextCheck"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

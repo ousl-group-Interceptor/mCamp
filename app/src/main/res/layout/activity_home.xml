@@ -9,7 +9,6 @@
     tools:context=".ActivityHome"
     tools:openDrawer="start">
 
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -62,11 +61,11 @@
                     android:layout_height="55dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="15"
-                    android:text="Home"
+                    android:text="@string/home"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="30sp"
-                    tools:ignore="TextSizeCheck" />
+                    tools:ignore="TextSizeCheck,TextContrastCheck" />
 
                 <View
                     android:layout_width="0dp"
@@ -81,17 +80,18 @@
                     android:padding="10dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/baseline_search_24"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/searchIcon" />
 
                 <ImageView
                     android:id="@+id/setting"
                     android:layout_width="0dp"
-                    android:layout_weight="5"
                     android:layout_height="50dp"
-                    android:padding="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="5"
+                    android:contentDescription="@string/settingIcon"
+                    android:padding="10dp"
                     android:src="@drawable/settings"
-                    android:contentDescription="TODO" />
+                    tools:ignore="ImageContrastCheck" />
 
                 <View
                     android:layout_width="0dp"
@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="115dp"
                 android:layout_marginTop="150dp"
-                android:text="All Your Travel Plans In \nOne Application "
+                android:text="@string/all_your_travel_plans_in_none_application"
                 android:textColor="@color/black"
                 android:textAlignment="textEnd"
                 android:textSize="20sp"
@@ -131,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:background="@drawable/round_style_home_button"
-                        android:text="Travel Places"
+                        android:text="@string/travelPlaces"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -145,11 +145,11 @@
                         android:layout_marginTop="10dp"
                         android:layout_weight="10"
                         android:background="@drawable/round_style_home_button"
-                        android:text="Accomodation Hotels"
+                        android:text="@string/accommodationHotels"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        tools:ignore="NestedWeights,VisualLintButtonSize">
+                        tools:ignore="InefficientWeight,NestedWeights,VisualLintButtonSize">
 
                     </Button>
 
@@ -171,7 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:background="@drawable/round_style_home_button"
-                        android:text="Handy Crafts Suvinoirs"
+                        android:text="@string/handyCraftsSuvinoirs"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -185,11 +185,11 @@
                         android:layout_marginTop="10dp"
                         android:layout_weight="10"
                         android:background="@drawable/round_style_home_button"
-                        android:text="Transpotation"
+                        android:text="@string/transportation"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        tools:ignore="VisualLintButtonSize">
+                        tools:ignore="InefficientWeight,NestedWeights,VisualLintButtonSize">
 
                     </Button>
 

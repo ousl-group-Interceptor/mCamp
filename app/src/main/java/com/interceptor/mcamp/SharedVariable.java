@@ -9,7 +9,7 @@ public class SharedVariable {
     private static final String KEY_USER_ID = "UserID";
     private final Context mContext;
 
-    public SharedVariable(MainActivity mainActivity) {
+    public SharedVariable(ActivityMain mainActivity) {
         mContext = mainActivity;
     }
 
