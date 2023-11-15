@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -31,6 +34,10 @@ public class Common {
     public static ArrayList<String> ImageID = new ArrayList<>();
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
+
+    public static String emailToID(String email){
+        return email.replaceAll("[.$\\[\\]#/\\\\]", "");
+    }
 
     public static void showMessage(Context context, String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -61,6 +68,21 @@ public class Common {
 
     public static void stopLoading() {
         progressDialog.dismiss(); // = ProgressDialog.show(context,title,"Please wait...",false,false);
+    }
+
+    public static String hashString(String input) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedHash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+
+        StringBuilder hexString = new StringBuilder(2 * encodedHash.length);
+        for (byte b : encodedHash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     public static String getCDateTime() {

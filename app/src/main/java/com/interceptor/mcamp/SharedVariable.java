@@ -7,6 +7,13 @@ import android.content.SharedPreferences;
 public class SharedVariable {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_USER_ID = "UserID";
+    private static final String KEY_Email = "Email";
+    private static final String KEY_SIGNIN_Email = "SignInEmail";
+    private static final String KEY_SIGNIN_PASSWORD = "SignInPassword";
+    private static final String KEY_Google = "Google";
+    private static final String KEY_Facebook = "FacebookAuthentication";
+    private static final String KEY_Name = "Name";
+    private static final String KEY_Version = "Version";
     private final Context mContext;
 
     public SharedVariable(ActivityMain mainActivity) {
@@ -17,23 +24,77 @@ public class SharedVariable {
         mContext = activitySplash;
     }
 
+    public SharedVariable(ActivitySignUp activitySignUp) {
+        mContext = activitySignUp;
+    }
+
+    public SharedVariable(ActivitySignIn activitySignIn) {
+        mContext = activitySignIn;
+    }
+
+    public SharedVariable(ActivityHome activityHome) {
+        mContext = activityHome;
+    }
+
+
+    public void setWhileLogin(String userID, String name, String email, boolean google, boolean facebook) {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USER_ID, userID);
+        editor.putBoolean(KEY_Google, google);
+        editor.putBoolean(KEY_Facebook, facebook);
+        editor.putString(KEY_Email, email);
+        editor.putString(KEY_Name, name);
+        editor.apply();
+    }
 
     public String getUserID() {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getString(KEY_USER_ID, "unknown");
     }
 
-    public void setWhileLogin(String userID) {
+    public boolean getGoogle() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_Google, false);
+    }
+
+    public boolean getFacebook() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_Facebook, false);
+    }
+
+    public String getEmail() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getString(KEY_Email, "unknown");
+    }
+
+    public String getName() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getString(KEY_Name, "unknown");
+    }
+
+    public void setRememberMe(String email, String password) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KEY_USER_ID, userID);
+        editor.putString(KEY_SIGNIN_Email, email);
+        editor.putString(KEY_SIGNIN_PASSWORD, password);
         editor.apply();
     }
 
-//    public boolean getNewUser() {
-//        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-//        return prefs.getBoolean(KEY_NEW_USER, true);
-//    }
+    public String getRememberEmail() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getString(KEY_SIGNIN_Email, "unknown");
+    }
+
+    public String getRememberPassword() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getString(KEY_SIGNIN_PASSWORD, "unknown");
+    }
+
+    public double getVersion() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return Double.parseDouble(prefs.getString(KEY_Version, "1.0"));
+    }
 
 }
 

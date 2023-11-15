@@ -1,26 +1,45 @@
 {
   "project_info": {
-    "project_number": "856712960461",
-    "project_id": "mcamp-573ee",
-    "storage_bucket": "mcamp-573ee.appspot.com"
+    "project_number": "460722593632",
+    "firebase_url": "https://mcamp-eba54-default-rtdb.firebaseio.com",
+    "project_id": "mcamp-eba54",
+    "storage_bucket": "mcamp-eba54.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:856712960461:android:5eb4f973eb0d19aed38c84",
+        "mobilesdk_app_id": "1:460722593632:android:cb52e2b52ff6c15e6e8805",
         "android_client_info": {
           "package_name": "com.interceptor.mcamp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "460722593632-sg29f6qb58gi324qa36ujk6jrpqs2gmc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.interceptor.mcamp",
+            "certificate_hash": "e0503b75f59dc9aa0da78a6df0f6b5d83a3982b7"
+          }
+        },
+        {
+          "client_id": "460722593632-7938blg4npqe49qg7k4bl1stj1t05ucu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoc0t1MqCjzI5wvoR6pFIFXi7Q4CrguIg"
+          "current_key": "AIzaSyBGYlWf7Gegwc1Lnu8wc9wJ4kP4apE9ZKo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460722593632-7938blg4npqe49qg7k4bl1stj1t05ucu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

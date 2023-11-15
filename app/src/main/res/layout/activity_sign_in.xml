@@ -23,7 +23,6 @@
             android:textStyle="bold"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -32,17 +31,19 @@
             app:boxStrokeColor="#00000000">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inEmail"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:ems="15"
                 android:hint="@string/enterYourEmail"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:inputType="textEmailAddress"
                 app:boxStrokeColor="#00000000"
                 tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -52,10 +53,13 @@
             app:boxStrokeColor="#00000000">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inPassword"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 app:boxStrokeColor="#00000000"
                 android:ems="15"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:hint="@string/enterYourPassword"
                 android:inputType="textPassword"
                 android:password="true"
@@ -109,6 +113,8 @@
                 android:layout_weight="15"
                 android:backgroundTint="#000000"
                 android:text="@string/signIn"
+                android:textColor="@color/white"
+                android:onClick="signIn"
                 android:textSize="24sp"
                 tools:ignore="UsingOnClickInXml,VisualLintButtonSize,DuplicateSpeakableTextCheck"/>
 
@@ -117,6 +123,87 @@
                 android:layout_height="5dp"
                 android:layout_weight="1"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/googleSignInButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:background="@drawable/round_style_authenticator"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:onClick="signInWithGoogle"
+            android:orientation="horizontal"
+            tools:ignore="UsingOnClickInXml,VisualLintBounds">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/imageGoogle"
+                android:src="@drawable/image_google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:text="@string/google"
+                android:textColor="@color/black"
+                android:textSize="21sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/imageArrow"
+                android:src="@drawable/image_right_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:onClick="signInWithFacebook"
+            android:background="@drawable/round_style_authenticator"
+            android:focusable="true"
+            android:visibility="invisible"
+            tools:ignore="UsingOnClickInXml">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/image_facebook"
+                android:contentDescription="@string/imageFacebook" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/facebook"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="21sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/image_right_arrow"
+                android:contentDescription="@string/imageArrow" />
         </LinearLayout>
 
     </LinearLayout>

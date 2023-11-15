@@ -11,14 +11,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class sendEmail {
+public class SendEmail {
 
-    boolean isSent = false;
+    private boolean isSent = false;
 
-    public sendEmail(String stringReceiverEmail, String title, String body) {
+    public SendEmail(String stringReceiverEmail, String title, String body) {
         try {
-            String stringSenderEmail = "planetd.interceptor@gmail.com";
-            String stringPasswordSenderEmail = "zcghxrcaqizvmoct";
+            String stringSenderEmail = "interceptormcamp@gmail.com";
+            String stringPasswordSenderEmail = "eelyzsryjzqkgsry";
 
             String stringHost = "smtp.gmail.com";
 
@@ -64,24 +64,3 @@ public class sendEmail {
         return isSent;
     }
 }
-
-
-//    String body = "Dear Friend, \n\nWelcome to Cipher. \n\nYour Login OTP is " + genOTP + ".\n\n If didn't you request this, Please ignore this massage";
-//    sendEmail se = new sendEmail(stringEmail, "Cipher Registration OTP", body);
-//    boolean isSent = se.getIsSent();
-//Common.stopLoading();
-
-
-
-//rnum = Random.Range(99999, 999998);
-//        rnum++;
-//        mail.Subject = "OTP Confirmation";
-//        mail.Body = "Hellow "+username+". "+"\nYour OTP is " + rnum + ". \nDo not shear this to anyone.\n**************Thank You**************";
-
-
-//mail.Subject = "OTP Confirmation";
-//        mail.Body = "Welcome To mCamp. \n"+username.text+ " you successfully registered with mCamp. \n**************Thank You**************";
-
-
-//mail.Subject = "OTP Confirmation";
-//        mail.Body = "Dear " + username + ".\nYou successfully reset password of mCamp.\n**************Thank You**************";
