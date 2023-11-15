@@ -53,6 +53,15 @@
     <string name="facebook_app_id">1234</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
+    <string name="create_a_new_password">Create a New Password</string>
+    <string name="password_note">Your new password must be different from previous used password</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_password_note">Enter the email associated with your account and we will send an email with instructions to reset your password.</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="mark">\?Mark</string>
+    <string name="add_new_location">Add new Location</string>
 
 
 </resources>

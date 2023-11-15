@@ -89,10 +89,13 @@
                 android:id="@+id/forgetPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="openForgetPassword"
                 android:text="@string/forgetPassword"
                 android:textColor="#0000FF"
                 android:textSize="14sp"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,UsingOnClickInXml,TouchTargetSizeCheck" />
 
         </LinearLayout>
 

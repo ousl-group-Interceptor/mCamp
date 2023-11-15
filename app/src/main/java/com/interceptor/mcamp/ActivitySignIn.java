@@ -144,4 +144,8 @@ public class ActivitySignIn extends AppCompatActivity {
     public void signInWithFacebook(View view) {
         startActivity(new Intent(this, FacebookAuthentication.class));
     }
+
+    public void openForgetPassword(View view) {
+        startActivity(new Intent(this, ActivityResetPassword.class));
+    }
 }

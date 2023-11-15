@@ -32,7 +32,7 @@ public class EmailManager {
     }
 
     public boolean sendMail(String username){
-        return sendMail("OTP Confirmation", "Welcome To mCamp. \n"+username+ " you successfully registered with mCamp. \n**************Thank You**************");
+        return sendMail("Welcome", "Welcome To mCamp. \n"+username+ " you successfully registered with mCamp. \n**************Thank You**************");
     }
 
     public boolean sendMail(){

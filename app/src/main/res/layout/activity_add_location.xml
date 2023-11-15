@@ -6,33 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ActivityAddLocation">
 
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:background="#D9D9D9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="25dp"
         android:paddingStart="15dp"
         android:paddingTop="2dp"
-        android:text="Add new Loacation"
+        android:background="#D9D9D9"
+        android:text="@string/add_new_location"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints,RtlSymmetry,TextSizeCheck"
-        tools:layout_editor_absoluteX="116dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,RtlSymmetry,TextSizeCheck"/>
 
     <ImageView
         android:id="@+id/imageView2"

@@ -28,7 +28,7 @@ import java.util.Random;
 public class Common {
 
     private static ProgressDialog progressDialog;
-    public static String description, server, rDBEmail, dataID, AlarmName, taskName, taskDescription, startTime, notifyTime, link;
+    public static String userID, email;
     public static boolean edit = false, tips=true;
     public static ArrayList<Bitmap> ImageBitmap = new ArrayList<>();
     public static ArrayList<String> ImageID = new ArrayList<>();

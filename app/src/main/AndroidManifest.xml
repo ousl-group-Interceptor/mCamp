@@ -24,7 +24,7 @@
             android:name=".ActivityCreateNewPassword"
             android:exported="false" />
         <activity
-            android:name=".ActivityResetpassword"
+            android:name=".ActivityResetPassword"
             android:exported="false" />
         <activity
             android:name=".GoogleAuthentication"
