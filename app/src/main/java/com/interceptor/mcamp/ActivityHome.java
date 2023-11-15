@@ -1,10 +1,13 @@
 package com.interceptor.mcamp;
 
+import static com.interceptor.mcamp.R.id.nav_view;
+
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,16 +17,16 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class ActivityHome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import java.util.Objects;
+
+public class ActivityHome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-
-    TextView textView;
-
-    Menu menu;
+    SharedVariable sharedVariable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +35,23 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(nav_view);
+
+        sharedVariable = new SharedVariable(this);
 
         setSupportActionBar(toolbar);
 
-
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar
+                ,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.setCheckedItem(R.id.nav_view);
 
 
     }
@@ -53,45 +59,61 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.nav_home:
-//                break;
-//            case  R.id.nav_notification:
-//                Log.d("Navigate", "Notification");
-//                break;
-//
-//            case  R.id.nav_faq:
-//                Log.d("Navigate", "FAQ");
-//                break;
-//
-//            case  R.id.nav_setting:
-//                Log.d("Navigate", "Setting");
-//                break;
-//
-//            case  R.id.nav_feedback:
-//                Log.d("Navigate", "feedback");
-//                break;
-//
-//            case R.id.nav_reviews:
-//                Log.d("Navigate", "Reviews");
-//                break;
-//
-//            case R.id.nav_profile:
-//                Log.d("Navigate", "Profile");
-//                break;
-//
-//            case R.id.nav_logout:
-//                Log.d("Navigate", "Logout");
-//                break;
-//
-//            case R.id.nav_share:
-//                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.nav_rate:
-//                Toast.makeText(this, "Rate", Toast.LENGTH_SHORT).show();
-//                break;
-//        }
+        if(item.getItemId() == R.id.nav_home) {
+            startActivity(new Intent(this, ActivityHome.class));
+        }
+        if(item.getItemId() == R.id.nav_notification) {
+            startActivity(new Intent(this, ActivityNotification.class));
+        }
+        if(item.getItemId() == R.id.nav_faq) {
+
+        }
+        if(item.getItemId() == R.id.nav_setting) {
+
+        }
+        if(item.getItemId() == R.id.nav_feedback) {
+
+        }
+        if(item.getItemId() == R.id.nav_reviews) {
+
+        }
+        if(item.getItemId() == R.id.nav_profile) {
+
+        }
+        if(item.getItemId() == R.id.nav_logout) {
+            logOut();
+        }
+        if(item.getItemId() == R.id.nav_share) {
+
+        }
+        if(item.getItemId() == R.id.nav_rate) {
+
+        }
+
         drawerLayout.closeDrawer(GravityCompat.START);
-        return false;
+        return true;
+    }
+
+    private void logOut() {
+        //if(sharedVariable.getFacebook())
+            //facebook logout
+        if(sharedVariable.getGoogle())
+            FirebaseAuth.getInstance().signOut();
+        sharedVariable.setWhileLogin("unknown","unknown","unknown",false, false);
+        startActivity(new Intent(this, ActivitySplash.class));
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit App")
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", (dialog, which) -> finishAffinity())
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    public void openTravelPlaces(View view) {
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".ActivityHome"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -47,7 +47,7 @@
                     android:layout_weight="5"
                     android:layout_height="wrap_content"
                     android:elevation="4dp"
-                    app:navigationIcon="@drawable/baseline_format_align_justify_24">
+                    app:navigationIcon="@drawable/baseline_menu_24">
                 </androidx.appcompat.widget.Toolbar>
 
                 <View
@@ -104,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="115dp"
                 android:layout_marginTop="150dp"
+                android:layout_marginEnd="20dp"
                 android:text="@string/all_your_travel_plans_in_none_application"
                 android:textColor="@color/black"
                 android:textAlignment="textEnd"
@@ -130,12 +131,14 @@
                         android:id="@+id/home_button1"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
-                        android:background="@drawable/round_style_home_button"
+                        android:onClick="openTravelPlaces"
+                        android:backgroundTint="#DFD2D2"
                         android:text="@string/travelPlaces"
+                        android:textColor="#000000"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        tools:ignore="VisualLintButtonSize">
+                        tools:ignore="UsingOnClickInXml,VisualLintButtonSize">
                     </Button>
 
                     <Button
@@ -144,7 +147,8 @@
                         android:layout_height="140dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="10"
-                        android:background="@drawable/round_style_home_button"
+                        android:textColor="#000000"
+                        android:backgroundTint="#DFD2D2"
                         android:text="@string/accommodationHotels"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
@@ -170,8 +174,9 @@
                         android:id="@+id/home_button3"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
-                        android:background="@drawable/round_style_home_button"
+                        android:backgroundTint="#DFD2D2"
                         android:text="@string/handyCraftsSuvinoirs"
+                        android:textColor="#000000"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -184,8 +189,9 @@
                         android:layout_height="140dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="10"
-                        android:background="@drawable/round_style_home_button"
+                        android:backgroundTint="#DFD2D2"
                         android:text="@string/transportation"
+                        android:textColor="#000000"
                         android:textColorLink="@color/material_dynamic_neutral20"
                         android:textSize="16sp"
                         android:textStyle="bold"

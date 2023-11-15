@@ -8,46 +8,39 @@
 
         <item
             android:id="@+id/nav_home"
-            android:title="Home"
+            android:title="@string/home"
             android:icon="@drawable/home"/>
 
         <item
             android:id="@+id/nav_notification"
-            android:title="Notification"
+            android:title="@string/notification"
             android:icon="@drawable/baseline_notifications_24"/>
 
         <item
             android:id="@+id/nav_faq"
-            android:title="FAQ"
+            android:title="@string/faq"
             android:icon="@drawable/baseline_question_mark_24"/>
 
         <item
             android:id="@+id/nav_setting"
-            android:title="Setting"
+            android:title="@string/setting"
             android:icon="@drawable/settings"/>
 
         <item
             android:id="@+id/nav_feedback"
-            android:title="Feedback"
+            android:title="@string/feedback"
             android:icon="@drawable/baseline_feedback_24"/>
 
         <item
             android:id="@+id/nav_reviews"
-            android:title="Reviews"
+            android:title="@string/reviews"
             android:icon="@drawable/baseline_reviews_24"/>
-
-        <item
-            android:id="@+id/nav_add_account"
-            android:title="ADD_Account"
-            android:icon="@drawable/baseline_add_24"/>
-
-
 
     </group>
 
 
 
-    <item android:title="Profile" >
+    <item android:title="@string/profile" >
 
 
         <menu>
@@ -55,12 +48,12 @@
 
                 <item
                     android:id="@+id/nav_profile"
-                    android:title="profile"
+                    android:title="@string/profile"
                     android:icon="@drawable/person"/>
 
                 <item
                     android:id="@+id/nav_logout"
-                    android:title="Logout"
+                    android:title="@string/logout"
                     android:icon="@drawable/logout"/>
             </group>
         </menu>
@@ -69,18 +62,18 @@
 
 
 
-    <item android:title="communicate">
+    <item android:title="@string/communicate">
 
         <menu>
 
             <item
                 android:id="@+id/nav_share"
-                android:title="Share"
+                android:title="@string/share"
                 android:icon="@drawable/share"/>
 
             <item
                 android:id="@+id/nav_rate"
-                android:title="Rate"
+                android:title="@string/rate"
                 android:icon="@drawable/baseline_star_rate_24"/>
 
 

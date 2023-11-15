@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/memoryCamp"
+            android:textColor="#000000"
             android:textAlignment="center"
             android:textSize="48sp"
             android:textStyle="bold" />
@@ -56,6 +57,7 @@
                 android:layout_height="80dp"
                 android:text="@string/signIn"
                 android:textSize="24sp"
+                android:textColor="@color/white"
                 android:onClick="openSignIn"
                 android:backgroundTint="#000000"
                 tools:ignore="UsingOnClickInXml,VisualLintButtonSize">
@@ -72,6 +74,7 @@
                 android:layout_height="80dp"
                 android:onClick="openSignUp"
                 android:text="@string/signUp"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:backgroundTint="#000000"
                 tools:ignore="UsingOnClickInXml,VisualLintButtonSize"/>
@@ -91,10 +94,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="36dp"
+            android:focusable="true"
+            android:onClick="openHome"
             android:text="@string/skipForNow"
             android:textAlignment="center"
-            android:textColor="#151414">
-        </TextView>
+            android:textColor="#151414"
+            tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck"/>
 
         <View
             android:layout_width="match_parent"

@@ -23,52 +23,64 @@
             android:textStyle="bold"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             app:boxStrokeWidth="0dp"
-            android:background="@drawable/round_style_input_filed">
+            android:background="@drawable/round_style_input_filed"
+            app:boxStrokeColor="#00000000">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inName"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:ems="15"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:hint="@string/enterYourName"
-                android:inputType="textEmailAddress"
+                android:inputType="textPersonName"
+                app:boxStrokeColor="#00000000"
                 tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             app:boxStrokeWidth="0dp"
-            android:background="@drawable/round_style_input_filed">
+            android:background="@drawable/round_style_input_filed"
+            app:boxStrokeColor="#00000000">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inEmail"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
+                app:boxStrokeColor="#00000000"
                 android:ems="15"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:hint="@string/enterYourEmail"
                 android:inputType="textEmailAddress"
                 tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             app:boxStrokeWidth="0dp"
             android:background="@drawable/round_style_input_filed"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="#00000000">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inPassword"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
+                app:boxStrokeColor="#00000000"
                 android:ems="15"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:hint="@string/enterYourPassword"
                 android:inputType="textPassword"
                 android:password="true"
@@ -76,18 +88,22 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             app:boxStrokeWidth="0dp"
             android:background="@drawable/round_style_input_filed"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="#00000000">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
+                app:boxStrokeColor="#00000000"
                 android:ems="15"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:hint="@string/enterYourConfirmPassword"
                 android:inputType="textPassword"
                 android:password="true"
@@ -111,6 +127,8 @@
                 android:layout_weight="15"
                 android:backgroundTint="#000000"
                 android:text="@string/signUp"
+                android:textColor="@color/white"
+                android:onClick="signUp"
                 android:textSize="24sp"
                 tools:ignore="UsingOnClickInXml,VisualLintButtonSize,DuplicateSpeakableTextCheck"/>
 

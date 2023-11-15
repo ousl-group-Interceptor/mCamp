@@ -1,5 +1,5 @@
 package com.interceptor.mcamp;
-
+//Done
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,5 +20,9 @@ public class ActivityWelcome extends AppCompatActivity {
 
     public void openSignUp(View view) {
         startActivity(new Intent(this, ActivitySignUp.class));
+    }
+
+    public void openHome(View view) {
+        startActivity(new Intent(this, ActivityHome.class));
     }
 }
