@@ -18,6 +18,24 @@
         android:theme="@style/Theme.MCamp"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityFeedback"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityTransportation"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityHandyCrafts"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityAccommodation"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityTravalPlace"
+            android:exported="false" />
+        <activity
             android:name=".ActivityAddLocation"
             android:exported="false" />
         <activity
