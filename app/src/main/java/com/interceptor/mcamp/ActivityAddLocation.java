@@ -286,8 +286,15 @@ public class ActivityAddLocation extends AppCompatActivity {
         keyWordsList = stringKeyWords.split(" ");
         locationCoordinates = new GoogleMapsLocationParser()
                 .getLatitudeLongitude(locationLinkUri);
-        if (checkRange())
-            createLocation();
+        if(locationCoordinates.length==2) {
+            if (checkRange())
+                createLocation();
+        }else{
+            Common.stopLoading();
+            Common.showMessage(this, "Not found", "Can not find location. " +
+                    "Try another link.\n(Please use dropping link, without name.\nChange " +
+                    "your pin point little bit)");
+        }
     }
 
     private boolean checkRange() {
@@ -296,7 +303,8 @@ public class ActivityAddLocation extends AppCompatActivity {
             return true;
         else {
             Common.stopLoading();
-            String msg = "You in out of range to location.\nMaximum distance between you and location is " + maxRange + "km.";
+            String msg = "You in out of range to location.\nMaximum distance between you and" +
+                    " location is " + maxRange + "km.";
             Common.showMessage(this, "Out of range.", msg);
             return false;
         }
@@ -311,12 +319,14 @@ public class ActivityAddLocation extends AppCompatActivity {
     }
 
     private void createLocationID(boolean[] run) {
-        Data.child("AppAttributes/LastID/" + selectedCategory).addValueEventListener(new ValueEventListener() {
+        Data.child("AppAttributes/LastID/" + selectedCategory)
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
-                    newLocationID = String.valueOf(Integer.parseInt(String.valueOf(dataSnapshot.getValue()))
+                    newLocationID = String.valueOf(Integer.parseInt(String
+                            .valueOf(dataSnapshot.getValue()))
                             + Common.randomIDSkip());
                     uploadImage();
                 }
