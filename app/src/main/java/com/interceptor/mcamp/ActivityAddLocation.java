@@ -291,9 +291,9 @@ public class ActivityAddLocation extends AppCompatActivity {
                 createLocation();
         }else{
             Common.stopLoading();
-            Common.showMessage(this, "Not found", "Can not find location. " +
-                    "Try another link.\n(Please use dropping link, without name.\nChange " +
-                    "your pin point little bit)");
+            Common.showMessage(this, "Not found", "The location cannot be " +
+                    "found. Try another link. \nPlease use dropping link without name and " +
+                    "change your pin point a bit");
         }
     }
 
@@ -319,15 +319,18 @@ public class ActivityAddLocation extends AppCompatActivity {
     }
 
     private void createLocationID(boolean[] run) {
-        Data.child("AppAttributes/LastID/" + selectedCategory)
+        Data.child("Locations/" + selectedCategory)
                 .addValueEventListener(new ValueEventListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
-                    newLocationID = String.valueOf(Integer.parseInt(String
-                            .valueOf(dataSnapshot.getValue()))
-                            + Common.randomIDSkip());
+                    int i =0;
+                    do {
+                        newLocationID = Common.getCDateTimeString() + String.format("%04d", i);
+                        i++;
+                    }while (dataSnapshot.child(newLocationID).exists());
                     uploadImage();
                 }
             }
@@ -363,8 +366,7 @@ public class ActivityAddLocation extends AppCompatActivity {
     }
 
     private void uploadData() {
-        Data.child("Users/" + ID + "/Locations/" + selectedCategory).push().setValue(newLocationID);
-        Data.child("AppAttributes/LastID/" + selectedCategory).setValue(newLocationID);
+        Data.child("Users/" + ID + "/Locations/" + newLocationID).setValue(selectedCategory);
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("name").setValue(stringLocationName);
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("time").setValue(Common.getCTime());
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("Date").setValue(Common.getCDate());

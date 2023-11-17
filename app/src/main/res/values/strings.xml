@@ -69,6 +69,8 @@
     <string name="category">Category</string>
     <string name="key_words">Key Words</string>
     <string name="add">ADD</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="guest">Guest</string>
 
 
 </resources>

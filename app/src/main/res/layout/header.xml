@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:background="@drawable/background_welcome"
@@ -8,10 +9,12 @@
     android:padding="20dp">
 
     <ImageView
+        android:id="@+id/profile_picture"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:background="@drawable/round_style_image"
         android:src="@drawable/baseline_question_mark_24"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/profile_picture" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,11 +26,12 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:textColor="#909090"
-        android:text="www.abc@gmail.com"
+        android:text="@string/guest"
+        android:textColor="#DBD3AA"
         android:textSize="14sp" />
 
 

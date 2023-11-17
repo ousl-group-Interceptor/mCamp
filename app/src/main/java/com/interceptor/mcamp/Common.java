@@ -3,15 +3,21 @@ package com.interceptor.mcamp;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
+import android.os.ParcelFileDescriptor;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 
+import java.io.FileDescriptor;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -28,9 +34,9 @@ import java.util.Random;
 public class Common {
 
     private static ProgressDialog progressDialog;
-    public static String userID, email;
+    public static String userID, email, userName;
     public static boolean edit = false, tips=true;
-    public static ArrayList<Bitmap> ImageBitmap = new ArrayList<>();
+    public static Bitmap userImageBitmap;
     public static ArrayList<String> ImageID = new ArrayList<>();
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
@@ -48,6 +54,28 @@ public class Common {
             dialog.dismiss(); // dismisses the dialog
         });
         builder.show();
+    }
+
+    public static Bitmap getImageBitmap(Context context, String urlString) {
+        try {
+            Uri uri = Uri.parse(urlString);
+            ContentResolver resolver = context.getContentResolver();
+
+            // Open the input stream from the content resolver
+            ParcelFileDescriptor parcelFileDescriptor = resolver.openFileDescriptor(uri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+
+            // Decode the file descriptor into a bitmap
+            Bitmap bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+
+            // Close the file descriptor
+            parcelFileDescriptor.close();
+
+            return bitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String generateOTP() {
@@ -107,7 +135,7 @@ public class Common {
     public static String getCDateTimeString() {
         Date now = new Date();
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         return dateFormat.format(now);
     }
 
