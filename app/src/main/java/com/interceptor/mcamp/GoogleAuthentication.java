@@ -1,8 +1,9 @@
 package com.interceptor.mcamp;
 //Done
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,9 +61,10 @@ public class GoogleAuthentication extends ActivitySignIn {
                         assert currentUser != null;
                         String email = currentUser.getEmail();
                         String name = currentUser.getDisplayName();
+                        Uri userImage = currentUser.getPhotoUrl();
                         assert email != null;
 
-                        CheckRegister(email, name, new boolean[]{true});
+                        CheckRegister(email, name, userImage, new boolean[]{true});
                     } else {
                         Toast.makeText(this, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -73,7 +75,7 @@ public class GoogleAuthentication extends ActivitySignIn {
         }
     }
 
-    private void CheckRegister(String email, String name, boolean[] run) {
+    private void CheckRegister(String email, String name, Uri userImage, boolean[] run) {
         String ID;
         ID = Common.emailToID(email);
 
@@ -84,14 +86,12 @@ public class GoogleAuthentication extends ActivitySignIn {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
-                    if (!dataSnapshot.exists()) {
-                        Data.child("Users/" + ID + "/google").setValue("true");
-                        Data.child("Users/" + ID + "/facebook").setValue("false");
-                    }
-
+                    Data.child("Users/" + ID + "/google").setValue("true");
+                    Data.child("Users/" + ID + "/facebook").setValue("false");
                     Data.child("Users/" + ID + "/name").setValue(name);
                     Data.child("Users/" + ID + "/email").setValue(email);
-                    sharedVariable.setWhileLogin(ID, name, email, true, false);
+                    Data.child("Users/" + ID + "/userImage").setValue(String.valueOf(userImage));
+                    sharedVariable.setWhileLogin(ID, name, email, String.valueOf(userImage), true, false);
                     go();
                 }
             }
@@ -105,10 +105,5 @@ public class GoogleAuthentication extends ActivitySignIn {
 
     private void go() {
         startActivity(new Intent(this, ActivityHome.class));
-    }
-
-
-    public void facebook(View view) {
-        new FacebookAuthentication();
     }
 }

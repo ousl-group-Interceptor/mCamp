@@ -5,9 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ActivityHome"
-    tools:openDrawer="start">
+    tools:context=".ActivityHome">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -100,113 +98,152 @@
 
             </LinearLayout>
 
-            <TextView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
-                android:layout_marginTop="150dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/all_your_travel_plans_in_none_application"
-                android:textColor="@color/black"
-                android:textAlignment="textEnd"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1" />
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="10"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/home_button1"
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:onClick="openTravelPlaces"
-                        android:backgroundTint="#DFD2D2"
-                        android:text="@string/travelPlaces"
-                        android:textColor="#000000"
-                        android:textColorLink="@color/material_dynamic_neutral20"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="UsingOnClickInXml,VisualLintButtonSize">
-                    </Button>
+                        android:layout_height="115dp"
+                        android:layout_marginTop="150dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/all_your_travel_plans_in_none_application"
+                        android:textColor="@color/black"
+                        android:textAlignment="textEnd"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/home_button2"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="10"
-                        android:textColor="#000000"
-                        android:backgroundTint="#DFD2D2"
-                        android:text="@string/accommodationHotels"
-                        android:textColorLink="@color/material_dynamic_neutral20"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="InefficientWeight,NestedWeights,VisualLintButtonSize">
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="70dp"
+                        android:orientation="horizontal">
 
-                    </Button>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="200dp"
+                            android:layout_weight="1" />
 
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="10"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:onClick="openTravelPlaces"
+                                android:layout_width="match_parent"
+                                android:layout_height="140dp"
+                                android:clickable="true"
+                                android:background="@drawable/round_style_home_button"
+                                android:gravity="center_vertical"
+                                tools:ignore="UsingOnClickInXml,VisualLintButtonSize"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:padding="10dp"
+                                    android:text="@string/travelPlaces"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:onClick="openAccommodation"
+                                android:layout_width="match_parent"
+                                android:layout_height="140dp"
+                                android:layout_marginTop="10dp"
+                                android:clickable="true"
+                                android:background="@drawable/round_style_home_button"
+                                android:gravity="center_vertical"
+                                tools:ignore="UsingOnClickInXml,VisualLintButtonSize"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:padding="10dp"
+                                    android:text="@string/accommodationHotels"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="10"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:onClick="openHandyCrafts"
+                                android:layout_width="match_parent"
+                                android:layout_height="140dp"
+                                android:clickable="true"
+                                android:background="@drawable/round_style_home_button"
+                                android:gravity="center_vertical"
+                                tools:ignore="UsingOnClickInXml,VisualLintButtonSize"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:padding="10dp"
+                                    android:text="@string/handyCraftsSuvinoirs"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:onClick="openTransportation"
+                                android:layout_width="match_parent"
+                                android:layout_height="140dp"
+                                android:layout_marginTop="10dp"
+                                android:clickable="true"
+                                android:background="@drawable/round_style_home_button"
+                                android:gravity="center_vertical"
+                                tools:ignore="UsingOnClickInXml,VisualLintButtonSize"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:padding="10dp"
+                                    android:text="@string/transportation"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="10"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/home_button3"
-                        android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:backgroundTint="#DFD2D2"
-                        android:text="@string/handyCraftsSuvinoirs"
-                        android:textColor="#000000"
-                        android:textColorLink="@color/material_dynamic_neutral20"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="VisualLintButtonSize">
-                    </Button>
-
-                    <Button
-                        android:id="@+id/home_button4"
-                        android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="10"
-                        android:backgroundTint="#DFD2D2"
-                        android:text="@string/transportation"
-                        android:textColor="#000000"
-                        android:textColorLink="@color/material_dynamic_neutral20"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="InefficientWeight,NestedWeights,VisualLintButtonSize">
-
-                    </Button>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 

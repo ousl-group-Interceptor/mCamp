@@ -175,7 +175,7 @@ public class ActivitySignUp extends AppCompatActivity {
         Data.child("Users/" + ID + "/google").setValue("false");
         Data.child("Users/" + ID + "/facebook").setValue("false");
 
-        new SharedVariable(this).setWhileLogin(ID, stringName, stringEmail, false, false);
+        new SharedVariable(this).setWhileLogin(ID, stringName, stringEmail, null, false, false);
 
         emailManager.sendMail(stringName);
 

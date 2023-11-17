@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,7 +28,9 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    SharedVariable sharedVariable;
+    private SharedVariable sharedVariable;
+    private View header;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,40 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_view);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        header = navigationView.getHeaderView(0);
+        loadPersonalDetails();
 
+
+
+    }
+
+    private void loadPersonalDetails() {
+        loadPersonalDetailsImage();
+        loadPersonalDetailsName();
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void loadPersonalDetailsName() {
+        TextView displayName = header.findViewById(R.id.user_name);
+        if (Common.userName == null){
+            Common.userName = sharedVariable.getName();
+            assert sharedVariable.getName() != null;
+            displayName.setText(sharedVariable.getName());
+        }else {
+            displayName.setText(Common.userName);
+        }
+    }
+
+    private void loadPersonalDetailsImage() {
+        if(!sharedVariable.getUserImageUri().equals("unknown")){
+            ImageView profileImage = header.findViewById(R.id.profile_picture);
+            if (Common.userImageBitmap == null){
+                Common.userImageBitmap = Common.getImageBitmap(this, sharedVariable.getUserImageUri());
+                profileImage.setImageBitmap(Common.userImageBitmap);
+            }else
+                profileImage.setImageBitmap(Common.userImageBitmap);
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -105,7 +142,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             //facebook logout
         if(sharedVariable.getGoogle())
             FirebaseAuth.getInstance().signOut();
-        sharedVariable.setWhileLogin("unknown","unknown","unknown",false, false);
+        sharedVariable.setWhileLogin("unknown","unknown","unknown",null, false, false);
         startActivity(new Intent(this, ActivitySplash.class));
     }
 
@@ -121,5 +158,19 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     public void openTravelPlaces(View view) {
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
+    public void openHandyCrafts(View view) {
+    }
+
+    public void openTransportation(View view) {
+    }
+
+    public void openAccommodation(View view) {
     }
 }

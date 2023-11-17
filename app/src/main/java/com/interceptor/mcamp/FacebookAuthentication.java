@@ -99,7 +99,9 @@ public class FacebookAuthentication extends ActivitySignIn{
 
                     Data.child("Users/" + ID + "/name").setValue(user.getDisplayName());
                     Data.child("Users/" + ID + "/email").setValue(user.getEmail());
-                    sharedVariable.setWhileLogin(ID, user.getDisplayName(), user.getEmail(), false, true);
+                    String userImage = String.valueOf(user.getPhotoUrl());
+                    Data.child("Users/" + ID + "/userImage").setValue(userImage);
+                    sharedVariable.setWhileLogin(ID, user.getDisplayName(), user.getEmail(), userImage, false, true);
                     go();
                 }
             }

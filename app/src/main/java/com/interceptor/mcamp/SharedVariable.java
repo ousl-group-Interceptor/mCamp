@@ -12,7 +12,8 @@ public class SharedVariable {
     private static final String KEY_SIGNIN_PASSWORD = "SignInPassword";
     private static final String KEY_Google = "Google";
     private static final String KEY_Facebook = "FacebookAuthentication";
-    private static final String KEY_Name = "Name";
+    private static final String KEY_Name = "Guest";
+    private static final String KEY_USER_IMAGE_URI = "UserImageURI";
     private static final String KEY_Version = "Version";
     private final Context mContext;
 
@@ -41,7 +42,7 @@ public class SharedVariable {
     }
 
 
-    public void setWhileLogin(String userID, String name, String email, boolean google, boolean facebook) {
+    public void setWhileLogin(String userID, String name, String email, String img, boolean google, boolean facebook) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_ID, userID);
@@ -49,6 +50,7 @@ public class SharedVariable {
         editor.putBoolean(KEY_Facebook, facebook);
         editor.putString(KEY_Email, email);
         editor.putString(KEY_Name, name);
+        editor.putString(KEY_USER_ID, img);
         editor.apply();
     }
 
@@ -74,7 +76,7 @@ public class SharedVariable {
 
     public String getName() {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return prefs.getString(KEY_Name, "unknown");
+        return prefs.getString(KEY_Name, "Guest");
     }
 
     public void setRememberMe(String email, String password) {
@@ -98,6 +100,11 @@ public class SharedVariable {
     public double getVersion() {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return Double.parseDouble(prefs.getString(KEY_Version, "1.0"));
+    }
+
+    public String getUserImageUri() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getString(KEY_USER_IMAGE_URI, "unknown");
     }
 
 }

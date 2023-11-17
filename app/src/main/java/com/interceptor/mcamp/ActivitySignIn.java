@@ -113,7 +113,7 @@ public class ActivitySignIn extends AppCompatActivity {
                     String name, email;
                     name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
                     email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
-                    sharedVariable.setWhileLogin(ID, name, email, false, false);
+                    sharedVariable.setWhileLogin(ID, name, email, null, false, false);
                     complete(email);
                 }
             }
