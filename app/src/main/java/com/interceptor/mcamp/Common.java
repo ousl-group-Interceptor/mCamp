@@ -62,6 +62,18 @@ public class Common {
         return sb.toString();
     }
 
+    public static int randomIDSkip() {
+        final String NUMBERS = "0123456789";
+        final int OTP_LENGTH = 2;
+
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < OTP_LENGTH; i++) {
+            sb.append(NUMBERS.charAt(random.nextInt(NUMBERS.length())));
+        }
+        return Integer.parseInt(sb.toString());
+    }
+
     public static void startLoading(Context context, String title) {
         progressDialog = ProgressDialog.show(context, title, "Please wait...", false, false);
     }
@@ -96,6 +108,20 @@ public class Common {
         Date now = new Date();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+        return dateFormat.format(now);
+    }
+
+    public static String getCDate() {
+        Date now = new Date();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        return dateFormat.format(now);
+    }
+
+    public static String getCTime() {
+        Date now = new Date();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(now);
     }
 
@@ -418,5 +444,34 @@ public class Common {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static double getDistance(double[] currentGPS, double[] locationGPS) {
+        return calculateDistance(currentGPS[0], currentGPS[1], locationGPS[0], locationGPS[1]);
+    }
+
+    private static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        // Radius of the Earth in kilometers
+        final double R = 6371.0;
+
+        // Convert latitude and longitude from degrees to radians
+        lat1 = Math.toRadians(lat1);
+        lon1 = Math.toRadians(lon1);
+        lat2 = Math.toRadians(lat2);
+        lon2 = Math.toRadians(lon2);
+
+        // Calculate the change in coordinates
+        double dLat = lat2 - lat1;
+        double dLon = lon2 - lon1;
+
+        // Haversine formula
+        double a = Math.pow(Math.sin(dLat / 2), 2) +
+                Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dLon / 2), 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        // Calculate the distance
+
+        return R * c;
     }
 }

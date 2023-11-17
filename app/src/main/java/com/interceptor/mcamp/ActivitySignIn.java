@@ -21,9 +21,9 @@ import java.util.Objects;
 
 public class ActivitySignIn extends AppCompatActivity {
 
-    TextInputEditText email, password;
-    SharedVariable sharedVariable;
-    DatabaseReference Data;
+    private TextInputEditText email, password;
+    protected SharedVariable sharedVariable;
+    protected DatabaseReference Data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

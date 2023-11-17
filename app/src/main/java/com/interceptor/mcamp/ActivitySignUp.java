@@ -5,8 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -120,23 +118,23 @@ public class ActivitySignUp extends AppCompatActivity {
         Button okButton = popupView.findViewById(R.id.okButton);
         Button cancelButton = popupView.findViewById(R.id.cancelButton);
 
-        okButton.setEnabled(false);
-        OTPEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                okButton.setEnabled(OTPEditText.getText().toString().length() == 6);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        okButton.setEnabled(true);
+//        OTPEditText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                okButton.setEnabled(OTPEditText.getText().toString().length() == 6);
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
         // Set click listener for the OK button
         okButton.setOnClickListener(v -> {
