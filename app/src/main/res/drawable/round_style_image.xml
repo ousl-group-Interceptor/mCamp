@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- rounded_image.xml -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Background Color -->
     <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="250dp" />
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:color="@android:color/darker_gray"
+                android:width="2dp" />
         </shape>
     </item>
-
-    <!-- Border -->
-    <item android:drawable="@drawable/border_style" />
-
-    <!-- Add other drawable layers if needed -->
+    <item android:drawable="@drawable/baseline_reviews_24">
+        <clip android:drawable="@drawable/baseline_reviews_24" />
+    </item>
 </layer-list>

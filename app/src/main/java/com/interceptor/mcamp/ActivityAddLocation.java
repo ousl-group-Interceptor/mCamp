@@ -293,7 +293,7 @@ public class ActivityAddLocation extends AppCompatActivity {
             Common.stopLoading();
             Common.showMessage(this, "Not found", "The location cannot be " +
                     "found. Try another link. \nPlease use dropping link without name and " +
-                    "change your pin point a bit");
+                    "gichange your pin point a bit");
         }
     }
 

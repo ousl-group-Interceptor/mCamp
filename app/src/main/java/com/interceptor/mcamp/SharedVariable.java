@@ -50,7 +50,7 @@ public class SharedVariable {
         editor.putBoolean(KEY_Facebook, facebook);
         editor.putString(KEY_Email, email);
         editor.putString(KEY_Name, name);
-        editor.putString(KEY_USER_ID, img);
+        editor.putString(KEY_USER_IMAGE_URI, img);
         editor.apply();
     }
 

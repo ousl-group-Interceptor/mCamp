@@ -54,4 +54,10 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-auth")
+
+    //online image url to bitmap
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //round image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

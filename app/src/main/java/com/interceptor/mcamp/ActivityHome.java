@@ -5,6 +5,9 @@ import static com.interceptor.mcamp.R.id.nav_view;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +22,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.Objects;
 
@@ -30,6 +43,9 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     private SharedVariable sharedVariable;
     private View header;
+    private DatabaseReference Data;
+    private ImageView profileImage;
+    private StorageReference storageRef;
 
 
     @Override
@@ -56,6 +72,11 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_view);
+
+        Data = FirebaseDatabase.getInstance().getReference();
+        FirebaseApp.initializeApp(this);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         header = navigationView.getHeaderView(0);
@@ -84,13 +105,68 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
     private void loadPersonalDetailsImage() {
         if(!sharedVariable.getUserImageUri().equals("unknown")){
-            ImageView profileImage = header.findViewById(R.id.profile_picture);
+            profileImage = header.findViewById(R.id.profile_picture);
             if (Common.userImageBitmap == null){
-                Common.userImageBitmap = Common.getImageBitmap(this, sharedVariable.getUserImageUri());
+                if(sharedVariable.getGoogle() || sharedVariable.getFacebook())
+                    getImageBitmap(sharedVariable.getUserImageUri());
+                else
+                    loadImage(new boolean[]{true});
+            }else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
-            }else
-                profileImage.setImageBitmap(Common.userImageBitmap);
+            }
         }
+    }
+
+    private void loadImage(boolean[] run) {
+        String ID = sharedVariable.getUserID();
+
+        Data.child("Users/" + ID + "/image").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    if (dataSnapshot.exists()) {
+                        storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
+                            // Decode the byte array to a Bitmap
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            // Display the image in an ImageView
+                            Common.userImageBitmap = bitmap;
+                            profileImage.setImageBitmap(bitmap);
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle any errors
+            }
+        });
+    }
+
+    public void getImageBitmap(String imageUrl) {
+        //String imageUrl = "https://lh3.googleusercontent.com/a/ACg8ocLlv81FT4BvNtgUmlfUQ6qCfAFllgyJ96TnGn6BOV3HPA=s96-c";
+
+        // Use Picasso to load the image and convert it to a Bitmap
+        Picasso.get().load(imageUrl).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                // The 'bitmap' variable now contains the image in Bitmap format
+                // You can use it as needed, for example, set it to an ImageView
+                Common.userImageBitmap = bitmap;
+                profileImage.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                // Handle the case where the bitmap couldn't be loaded
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                // Do nothing or handle as needed
+            }
+        });
     }
 
     @SuppressLint("NonConstantResourceId")

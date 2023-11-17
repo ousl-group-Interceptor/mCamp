@@ -35,13 +35,13 @@ public class Common {
 
     private static ProgressDialog progressDialog;
     public static String userID, email, userName;
-    public static boolean edit = false, tips=true;
+    public static boolean edit = false, tips = true;
     public static Bitmap userImageBitmap;
     public static ArrayList<String> ImageID = new ArrayList<>();
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
 
-    public static String emailToID(String email){
+    public static String emailToID(String email) {
         return email.replaceAll("[.$\\[\\]#/\\\\]", "");
     }
 
@@ -56,7 +56,7 @@ public class Common {
         builder.show();
     }
 
-    public static Bitmap getImageBitmap(Context context, String urlString) {
+    public static Bitmap uriToBitmap(Context context, String urlString) {
         try {
             Uri uri = Uri.parse(urlString);
             ContentResolver resolver = context.getContentResolver();
@@ -74,8 +74,8 @@ public class Common {
             return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static String generateOTP() {
