@@ -36,6 +36,10 @@ public class SharedVariable {
         mContext = activityHome;
     }
 
+    public SharedVariable(ActivityAddLocation activityAddLocation) {
+        mContext = activityAddLocation;
+    }
+
 
     public void setWhileLogin(String userID, String name, String email, boolean google, boolean facebook) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);

@@ -18,12 +18,12 @@
     <string name="accommodationHotels">Accommodation Hotels</string>
     <string name="handyCraftsSuvinoirs">Handy Crafts Suvinoirs</string>
     <string name="transportation">Transportation</string>
-    <string name="signIn">Sign IN</string>
+    <string name="signIn">Sign In</string>
     <string name="enterYourEmail">Enter your email</string>
     <string name="enterYourPassword">Enter your password</string>
     <string name="rememberMe">Remember me</string>
     <string name="forgetPassword">Forget password</string>
-    <string name="signUp">Sign UP</string>
+    <string name="signUp">Sign Up</string>
     <string name="enterYourName">Enter your name</string>
     <string name="enterYourConfirmPassword">Enter Your Confirm Password</string>
     <string name="welcomeDescription">Welcome to get a new \nexperience of travelling</string>
@@ -62,6 +62,13 @@
     <string name="send_otp">Send OTP</string>
     <string name="mark">\?Mark</string>
     <string name="add_new_location">Add new Location</string>
+    <string name="location_image">LocationImage</string>
+    <string name="enter_location_name">Enter Location Name</string>
+    <string name="paste_location_link">Paste Location Link</string>
+    <string name="location_details">Location Details</string>
+    <string name="category">Category</string>
+    <string name="key_words">Key Words</string>
+    <string name="add">ADD</string>
 
 
 </resources>

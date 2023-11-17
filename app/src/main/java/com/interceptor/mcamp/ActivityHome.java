@@ -62,32 +62,38 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         if(item.getItemId() == R.id.nav_home) {
             startActivity(new Intent(this, ActivityHome.class));
         }
-        if(item.getItemId() == R.id.nav_notification) {
-            startActivity(new Intent(this, ActivityNotification.class));
-        }
-        if(item.getItemId() == R.id.nav_faq) {
+        if (item.getItemId() == R.id.nav_faq) {
 
         }
-        if(item.getItemId() == R.id.nav_setting) {
+        if (item.getItemId() == R.id.nav_setting) {
 
         }
-        if(item.getItemId() == R.id.nav_feedback) {
+        if (item.getItemId() == R.id.nav_feedback) {
 
         }
-        if(item.getItemId() == R.id.nav_reviews) {
-
-        }
-        if(item.getItemId() == R.id.nav_profile) {
-
-        }
-        if(item.getItemId() == R.id.nav_logout) {
+        if (item.getItemId() == R.id.nav_logout) {
             logOut();
         }
-        if(item.getItemId() == R.id.nav_share) {
+        if (item.getItemId() == R.id.nav_share) {
 
         }
-        if(item.getItemId() == R.id.nav_rate) {
+        if(!sharedVariable.getUserID().equals("unknown")) {
+            if (item.getItemId() == R.id.nav_notification) {
+                startActivity(new Intent(this, ActivityNotification.class));
+            }
+            if (item.getItemId() == R.id.nav_profile) {
 
+            }
+            if (item.getItemId() == R.id.nav_rate) {
+
+            }
+            if (item.getItemId() == R.id.nav_add_location) {
+                startActivity(new Intent(this, ActivityAddLocation.class));
+            }
+        }else {
+            if (item.getItemId() == R.id.nav_rate) {
+
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
