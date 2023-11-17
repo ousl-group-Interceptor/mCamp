@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -96,7 +97,8 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         TextView displayName = header.findViewById(R.id.user_name);
         if (Common.userName == null){
             Common.userName = sharedVariable.getName();
-            assert sharedVariable.getName() != null;
+            Log.d("outputNameShare", sharedVariable.getName());
+            Log.d("outputNameCommon", Common.userName);
             displayName.setText(sharedVariable.getName());
         }else {
             displayName.setText(Common.userName);

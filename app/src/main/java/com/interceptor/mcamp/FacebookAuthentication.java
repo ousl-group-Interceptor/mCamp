@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Collections;
 import java.util.Objects;
 
-public class FacebookAuthentication extends ActivitySignIn{
+public class FacebookAuthentication extends ActivitySignIn {
 
     CallbackManager callbackManager;
 
@@ -92,10 +92,10 @@ public class FacebookAuthentication extends ActivitySignIn{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
-                    if (!dataSnapshot.exists()) {
-                        Data.child("Users/" + ID + "/google").setValue("false");
-                        Data.child("Users/" + ID + "/facebook").setValue("true");
-                    }
+
+                    Data.child("Users/" + ID + "/google").setValue("false");
+                    Data.child("Users/" + ID + "/facebook").setValue("true");
+                    Data.child("Users/" + ID + "/password").setValue(ID);
 
                     Data.child("Users/" + ID + "/name").setValue(user.getDisplayName());
                     Data.child("Users/" + ID + "/email").setValue(user.getEmail());
