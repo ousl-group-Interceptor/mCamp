@@ -60,4 +60,7 @@ dependencies {
 
     //round image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //map
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 }

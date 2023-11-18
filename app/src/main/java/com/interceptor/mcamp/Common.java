@@ -28,18 +28,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 public class Common {
 
     private static ProgressDialog progressDialog;
     public static String userID, email, userName;
-    public static boolean edit = false, tips = true;
+    public static double[] addingLocation;
+    public static boolean addLocation = false, tips = true;
     public static Bitmap userImageBitmap;
     public static ArrayList<String> ImageID = new ArrayList<>();
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
+
+    //addLocationAttribute
+    public static List<Uri> imageUris = new ArrayList<>();
+    public static String locationName = null, locationDetails = null, keyWords = null;
+    public static int position = 0;
+
+    public static void resetAddLocationBackup(){
+        imageUris = new ArrayList<>();
+        locationName = null;
+        locationDetails = null;
+        keyWords = null;
+        position = 0;
+        addLocation = false;
+    }
 
     public static String emailToID(String email) {
         return email.replaceAll("[.$\\[\\]#/\\\\]", "");
@@ -136,6 +153,7 @@ public class Common {
         Date now = new Date();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(now);
     }
 

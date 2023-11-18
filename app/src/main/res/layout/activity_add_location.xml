@@ -75,27 +75,34 @@
                     tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="20dp"
+                android:padding="15dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/round_style_input_filed"
-                app:boxStrokeColor="#00000000"
-                app:boxStrokeWidth="0dp">
+                android:orientation="horizontal"
+                android:background="@drawable/round_style_input_filed">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inLocationLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="51dp"
-                    android:ems="15"
-                    android:hint="@string/paste_location_link"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    app:boxStrokeColor="#00000000"
-                    tools:ignore="Deprecated,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/show_latitut_lontitut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="selectLocation"
+                    android:text="@string/select_location"
+                    android:textColor="#0000FF"
+                    android:textSize="16sp"
+                    tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -157,6 +164,7 @@
                 android:autofillHints="Type here"
                 android:background="@drawable/details_border_style"
                 android:gravity="start"
+                android:hint="@string/ky_word_hint"
                 android:textColor="@color/black"
                 android:padding="5dp"
                 android:inputType="textMultiLine"

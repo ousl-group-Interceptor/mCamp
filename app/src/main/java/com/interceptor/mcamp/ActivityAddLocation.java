@@ -1,5 +1,6 @@
 package com.interceptor.mcamp;
 //Done
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,13 +14,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,16 +48,18 @@ import java.util.List;
 public class ActivityAddLocation extends AppCompatActivity {
 
     private ImageView locationImage;
-    private TextInputEditText locationName, locationLink;
+    private TextInputEditText locationName;
     private EditText locationDetails, keyWords;
     private Spinner category;
+    private TextView showLocation;
     private String selectedCategory, stringLocationName, stringLocationDetails, ID, newLocationID;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private final List<Uri> imageUris = new ArrayList<>();
+    private List<Uri> imageUris = new ArrayList<>();
     private final List<String> imageDownloadUris = new ArrayList<>();
     private double[] locationCoordinates, currentGPS;
     private String[] keyWordsList;
     private DatabaseReference Data;
+    private List<String> items;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final double maxRange = 5.0;
     private static String locationLinkUri;
@@ -68,10 +71,32 @@ public class ActivityAddLocation extends AppCompatActivity {
 
         locationImage = findViewById(R.id.location_image);
         locationName = findViewById(R.id.inLocationName);
-        locationLink = findViewById(R.id.inLocationLink);
         locationDetails = findViewById(R.id.location_details);
         keyWords = findViewById(R.id.keyWords);
         category = findViewById(R.id.spinner);
+        showLocation = findViewById(R.id.show_latitut_lontitut);
+
+        if (Common.addLocation) {
+            imageUris = Common.imageUris;
+            if (imageUris != null)
+                locationImage.setImageURI(imageUris.get(0));
+            if (Common.locationName != null)
+                locationName.setText(Common.locationName);
+            if (Common.locationDetails != null)
+                locationDetails.setText(Common.locationDetails);
+            if (Common.keyWords != null)
+                keyWords.setText(Common.keyWords);
+            if (Common.position != 0)
+                category.setSelection(Common.position);
+            if (Common.addingLocation != null) {
+                locationCoordinates = Common.addingLocation;
+                String str = locationCoordinates[0] + ", " + locationCoordinates[1];
+                showLocation.setText(str);
+            }
+            Common.resetAddLocationBackup();
+        }
+
+        Common.addingLocation = null;
 
         createSpinner();
 
@@ -150,8 +175,8 @@ public class ActivityAddLocation extends AppCompatActivity {
 
     private void createSpinner() {
         // Create a list of items for the Spinner
-        List<String> items = new ArrayList<>();
-        items.add("");
+        items = new ArrayList<>();
+        items.add("Select Category");
         items.add("Place");
         items.add("Accommodation");
         items.add("Handy Craft");
@@ -179,6 +204,7 @@ public class ActivityAddLocation extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Handle the selected item
                 selectedCategory = items.get(position);
+                Common.position = position;
             }
 
             @Override
@@ -236,15 +262,15 @@ public class ActivityAddLocation extends AppCompatActivity {
         if (imageUris.isEmpty()) {
             Common.stopLoading();
             Common.showMessage(this, "No images!!!", "Please select images.");
-        } else if (selectedCategory.equals("")) {
+        } else if (selectedCategory.equals("Select Category")) {
             Common.stopLoading();
             Common.showMessage(this, "No category!!!", "Please select category.");
         } else if (String.valueOf(locationName.getText()).equals("")) {
             Common.stopLoading();
             Common.showMessage(this, "No name!!!", "Please enter location name.");
-        } else if (String.valueOf(locationLink.getText()).equals("")) {
+        } else if (String.valueOf(showLocation.getText()).equals("")) {
             Common.stopLoading();
-            Common.showMessage(this, "No link!!!", "Please paste location link.");
+            Common.showMessage(this, "No location!!!", "Please select location.");
         } else if (String.valueOf(locationDetails.getText()).equals("")) {
             Common.stopLoading();
             Common.showMessage(this, "No location details!!!", "Please enter description about this location.");
@@ -253,47 +279,20 @@ public class ActivityAddLocation extends AppCompatActivity {
             Common.showMessage(this, "No key word!!!", "Please enter some key words for search this location.");
         } else {
             stringLocationName = String.valueOf(locationName.getText());
-            String stringLocationLink = String.valueOf(locationLink.getText());
-            Log.d("outputOk1", "run");
-            new FollowRedirectTask(new FollowRedirectTask.Callback() {
-                @Override
-                public void onResult(String result) {
-                    Log.d("outputOk2", "run");
-                    locationLinkUri = result;
-                    runNext();
-                }
-            }).execute(stringLocationLink);
-//            runNext();
+            runNext();
         }
     }
 
     public void runNext() {
-
-        while (locationLinkUri == null) {
-            try {
-                // Sleep for approximately 1 millisecond
-                Log.d("output", "sleeping");
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                // Handle the InterruptedException if needed
-                e.printStackTrace();
-            }
-        }
-
-        Log.d("out1", locationLinkUri);
         stringLocationDetails = String.valueOf(locationDetails.getText());
         String stringKeyWords = String.valueOf(keyWords.getText());
-        keyWordsList = stringKeyWords.split(" ");
-        locationCoordinates = new GoogleMapsLocationParser()
-                .getLatitudeLongitude(locationLinkUri);
-        if(locationCoordinates.length==2) {
+        keyWordsList = stringKeyWords.split(", ");
+        if (locationCoordinates.length == 2) {
             if (checkRange())
                 createLocation();
-        }else{
+        } else {
             Common.stopLoading();
-            Common.showMessage(this, "Not found", "The location cannot be " +
-                    "found. Try another link. \nPlease use dropping link without name and " +
-                    "change your pin point a bit");
+            Common.showMessage(this, "Location Not found", "Location not found please select.");
         }
     }
 
@@ -321,25 +320,25 @@ public class ActivityAddLocation extends AppCompatActivity {
     private void createLocationID(boolean[] run) {
         Data.child("Locations/" + selectedCategory)
                 .addValueEventListener(new ValueEventListener() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (run[0]) {
-                    run[0] = false;
-                    int i =0;
-                    do {
-                        newLocationID = Common.getCDateTimeString() + String.format("%04d", i);
-                        i++;
-                    }while (dataSnapshot.child(newLocationID).exists());
-                    uploadImage();
-                }
-            }
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (run[0]) {
+                            run[0] = false;
+                            int i = 0;
+                            do {
+                                newLocationID = Common.getCDateTimeString() + String.format("%04d", i);
+                                i++;
+                            } while (dataSnapshot.child(newLocationID).exists());
+                            uploadImage();
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle any errors
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle any errors
+                    }
+                });
     }
 
     private void uploadImage() {
@@ -391,6 +390,15 @@ public class ActivityAddLocation extends AppCompatActivity {
                             .setPositiveButton("Open Home", (dialog, which) -> startActivity(new Intent(this, ActivityHome.class)))
                             .show();
                 });
+    }
+
+    public void selectLocation(View view) {
+        Common.imageUris = imageUris;
+        Common.locationName = String.valueOf(locationName.getText());
+        Common.locationDetails = String.valueOf(locationDetails.getText());
+        Common.keyWords = String.valueOf(keyWords.getText());
+        Common.addLocation = true;
+        startActivity(new Intent(this, ActivityMapAddLocation.class));
     }
 
     private static class FollowRedirectTask extends AsyncTask<String, Void, String> {
@@ -450,5 +458,12 @@ public class ActivityAddLocation extends AppCompatActivity {
             // Extract other information as needed
             return connection.getURL().toString();
         }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ActivityHome.class));
+        finish();
     }
 }
