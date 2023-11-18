@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -62,8 +63,8 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar
-                ,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar
+                , R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -84,7 +85,6 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         loadPersonalDetails();
 
 
-
     }
 
     private void loadPersonalDetails() {
@@ -95,25 +95,25 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     @SuppressLint("SetTextI18n")
     private void loadPersonalDetailsName() {
         TextView displayName = header.findViewById(R.id.user_name);
-        if (Common.userName == null){
+        if (Common.userName == null) {
             Common.userName = sharedVariable.getName();
             Log.d("outputNameShare", sharedVariable.getName());
             Log.d("outputNameCommon", Common.userName);
             displayName.setText(sharedVariable.getName());
-        }else {
+        } else {
             displayName.setText(Common.userName);
         }
     }
 
     private void loadPersonalDetailsImage() {
-        if(!sharedVariable.getUserImageUri().equals("unknown")){
+        if (!sharedVariable.getUserImageUri().equals("unknown")) {
             profileImage = header.findViewById(R.id.profile_picture);
-            if (Common.userImageBitmap == null){
-                if(sharedVariable.getGoogle() || sharedVariable.getFacebook())
+            if (Common.userImageBitmap == null) {
+                if (sharedVariable.getGoogle() || sharedVariable.getFacebook())
                     getImageBitmap(sharedVariable.getUserImageUri());
                 else
                     loadImage(new boolean[]{true});
-            }else {
+            } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
         }
@@ -174,7 +174,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.nav_home) {
+        if (item.getItemId() == R.id.nav_home) {
             startActivity(new Intent(this, ActivityHome.class));
         }
         if (item.getItemId() == R.id.nav_faq) {
@@ -192,22 +192,31 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.nav_share) {
 
         }
-        if(!sharedVariable.getUserID().equals("unknown")) {
+        if (item.getItemId() == R.id.nav_rate) {
+
+        }
+        if (!sharedVariable.getUserID().equals("unknown")) {
             if (item.getItemId() == R.id.nav_notification) {
                 startActivity(new Intent(this, ActivityNotification.class));
             }
             if (item.getItemId() == R.id.nav_profile) {
 
             }
-            if (item.getItemId() == R.id.nav_rate) {
-
-            }
             if (item.getItemId() == R.id.nav_add_location) {
                 startActivity(new Intent(this, ActivityAddLocation.class));
             }
-        }else {
+        } else {
+            if (item.getItemId() == R.id.nav_notification) {
+                Toast.makeText(this, "Please Sign In To Use This Feature", Toast.LENGTH_SHORT).show();
+            }
+            if (item.getItemId() == R.id.nav_profile) {
+                Toast.makeText(this, "Please Sign In To Use This Feature", Toast.LENGTH_SHORT).show();
+            }
             if (item.getItemId() == R.id.nav_rate) {
-
+                Toast.makeText(this, "Please Sign In To Use This Feature", Toast.LENGTH_SHORT).show();
+            }
+            if (item.getItemId() == R.id.nav_add_location) {
+                Toast.makeText(this, "Please Sign In To Use This Feature", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -217,10 +226,10 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
     private void logOut() {
         //if(sharedVariable.getFacebook())
-            //facebook logout
-        if(sharedVariable.getGoogle())
+        //facebook logout
+        if (sharedVariable.getGoogle())
             FirebaseAuth.getInstance().signOut();
-        sharedVariable.setWhileLogin("unknown","unknown","unknown",null, false, false);
+        sharedVariable.setWhileLogin("unknown", "unknown", "unknown", null, false, false);
         startActivity(new Intent(this, ActivitySplash.class));
     }
 
