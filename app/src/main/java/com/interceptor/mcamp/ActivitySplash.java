@@ -32,6 +32,7 @@ public class ActivitySplash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         sharedVariable = new SharedVariable(this);
+        sharedVariable.setOnSplash(true);
 
         checkVersion(new boolean[]{true});
 
@@ -72,17 +73,23 @@ public class ActivitySplash extends AppCompatActivity {
         if (!sharedVariable.getUserID().equals("unknown")) {
             //navigate to home
             Common.stopLoading();
+            sharedVariable.setOnSplash(false);
             startActivity(new Intent(this, ActivityHome.class));
             finish();
         } else {
             loading = false;
             Common.stopLoading();
-            new Handler().postDelayed(() -> startActivity(new Intent(ActivitySplash.this, ActivityWelcome.class)), 5000);
+            new Handler().postDelayed(() -> {
+                if (sharedVariable.getOnSplash()) {
+                    startActivity(new Intent(ActivitySplash.this, ActivityWelcome.class));
+                }
+            }, 5000);
         }
     }
 
     public void openWelcome(View view) {
         //navigate to welcome page
+        sharedVariable.setOnSplash(false);
         startActivity(new Intent(this, ActivityWelcome.class));
     }
 
