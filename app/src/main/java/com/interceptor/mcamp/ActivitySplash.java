@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import java.util.Objects;
 
 public class ActivitySplash extends AppCompatActivity {
 
+    private boolean loading = true;
     SharedVariable sharedVariable;
 
     @Override
@@ -29,10 +31,16 @@ public class ActivitySplash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Common.startLoading(this, "Connecting...");
         sharedVariable = new SharedVariable(this);
 
         checkVersion(new boolean[]{true});
+
+        new Handler().postDelayed(() -> {
+            if (loading)
+                Common.startLoading(ActivitySplash.this, "Connecting...");
+        }, 1000);
+
+        new Handler().postDelayed(() -> startActivity(new Intent(ActivitySplash.this, ActivityWelcome.class)), 5000);
     }
 
     private void checkVersion(boolean[] run) {
@@ -49,8 +57,7 @@ public class ActivitySplash extends AppCompatActivity {
                                 .child("latestVersionLink").getValue()).toString().trim();
                         Common.stopLoading();
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
-                    }
-                    else
+                    } else
                         checkLogin();
                 }
             }
@@ -67,8 +74,10 @@ public class ActivitySplash extends AppCompatActivity {
             //navigate to home
             Common.stopLoading();
             startActivity(new Intent(this, ActivityHome.class));
-        }else
+        } else {
+            loading = false;
             Common.stopLoading();
+        }
     }
 
     public void openWelcome(View view) {
