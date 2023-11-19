@@ -88,8 +88,28 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadPersonalDetails() {
+        getData(new boolean[]{true});
         loadPersonalDetailsImage();
         loadPersonalDetailsName();
+    }
+
+    private void getData(boolean[] run) {
+        String ID = sharedVariable.getUserID();
+
+        Data.child("Users/" + ID + "/name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    sharedVariable.setName(String.valueOf(dataSnapshot.getValue()));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle any errors
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -109,10 +129,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         if (!sharedVariable.getUserImageUri().equals("unknown")) {
             profileImage = header.findViewById(R.id.profile_picture);
             if (Common.userImageBitmap == null) {
-                if (sharedVariable.getGoogle() || sharedVariable.getFacebook())
-                    getImageBitmap(sharedVariable.getUserImageUri());
-                else
-                    loadImage(new boolean[]{true});
+                loadImage(new boolean[]{true});
             } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
@@ -135,6 +152,9 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                             Common.userImageBitmap = bitmap;
                             profileImage.setImageBitmap(bitmap);
                         });
+                    } else if (sharedVariable.getGoogle() || sharedVariable.getFacebook()) {
+                        getImageBitmap(sharedVariable.getUserImageUri());
+                        profileImage.setImageBitmap(Common.userImageBitmap);
                     }
                 }
             }
@@ -147,9 +167,6 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     public void getImageBitmap(String imageUrl) {
-        //String imageUrl = "https://lh3.googleusercontent.com/a/ACg8ocLlv81FT4BvNtgUmlfUQ6qCfAFllgyJ96TnGn6BOV3HPA=s96-c";
-
-        // Use Picasso to load the image and convert it to a Bitmap
         Picasso.get().load(imageUrl).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -200,7 +217,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, ActivityNotification.class));
             }
             if (item.getItemId() == R.id.nav_profile) {
-
+                startActivity(new Intent(this, ActivityProfile.class));
             }
             if (item.getItemId() == R.id.nav_add_location) {
                 startActivity(new Intent(this, ActivityAddLocation.class));

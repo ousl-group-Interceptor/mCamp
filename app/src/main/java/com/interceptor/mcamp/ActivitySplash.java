@@ -40,7 +40,6 @@ public class ActivitySplash extends AppCompatActivity {
                 Common.startLoading(ActivitySplash.this, "Connecting...");
         }, 1000);
 
-        new Handler().postDelayed(() -> startActivity(new Intent(ActivitySplash.this, ActivityWelcome.class)), 5000);
     }
 
     private void checkVersion(boolean[] run) {
@@ -74,9 +73,11 @@ public class ActivitySplash extends AppCompatActivity {
             //navigate to home
             Common.stopLoading();
             startActivity(new Intent(this, ActivityHome.class));
+            finish();
         } else {
             loading = false;
             Common.stopLoading();
+            new Handler().postDelayed(() -> startActivity(new Intent(ActivitySplash.this, ActivityWelcome.class)), 5000);
         }
     }
 

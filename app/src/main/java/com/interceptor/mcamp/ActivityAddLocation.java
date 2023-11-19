@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -39,9 +38,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +58,6 @@ public class ActivityAddLocation extends AppCompatActivity {
     private List<String> items;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final double maxRange = 5.0;
-    private static String locationLinkUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,7 +181,7 @@ public class ActivityAddLocation extends AppCompatActivity {
         //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
 
         // Create an ArrayAdapter using the custom layout for the spinner items and the List<String>
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 R.layout.spinner_item_layout,
                 items // Your List<String>
@@ -399,65 +394,6 @@ public class ActivityAddLocation extends AppCompatActivity {
         Common.keyWords = String.valueOf(keyWords.getText());
         Common.addLocation = true;
         startActivity(new Intent(this, ActivityMapAddLocation.class));
-    }
-
-    private static class FollowRedirectTask extends AsyncTask<String, Void, String> {
-        private final Callback callback;
-
-        interface Callback {
-            void onResult(String result);
-        }
-
-        public FollowRedirectTask(Callback callback) {
-            this.callback = callback;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                String shortLink = params[0];
-                return followRedirect(shortLink);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (callback != null) {
-                callback.onResult(result);
-            }
-        }
-    }
-
-    static String followRedirect(String shortLink) throws IOException {
-        URL url = new URL(shortLink);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-        // Set instance follow redirects to true
-        connection.setInstanceFollowRedirects(true);
-
-        // Optional: Set other connection properties if needed
-        connection.setRequestMethod("GET");
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-        // Get the response code
-        int responseCode = connection.getResponseCode();
-
-        // Check if it's a redirection (HTTP 3xx status)
-        if (responseCode >= 300 && responseCode < 400) {
-            // Get the new location from the 'Location' header
-            String newLocation = connection.getHeaderField("Location");
-
-            // Follow the redirect recursively (if needed)
-            return followRedirect(newLocation);
-        } else {
-            // Not a redirect or final destination reached
-            // Extract other information as needed
-            return connection.getURL().toString();
-        }
     }
 
     @SuppressLint("MissingSuperCall")

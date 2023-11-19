@@ -75,6 +75,14 @@
     <string name="select_location">Select Location</string>
     <string name="submit">Submit</string>
     <string name="ky_word_hint">Use \"space with a comma\" (, ) for separate keywords.\nEx: Sri Lanka, Colombo</string>
+    <string name="_name">Name</string>
+    <string name="edit_button">Edit button</string>
+    <string name="email">Email</string>
+    <string name="my_contribution">My Contribution</string>
+    <string name="my_reviews">My Reviews</string>
+    <string name="change_name">Change Name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="update">Update</string>
 
 
 </resources>

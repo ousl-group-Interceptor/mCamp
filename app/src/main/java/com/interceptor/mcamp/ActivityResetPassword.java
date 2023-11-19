@@ -134,22 +134,6 @@ public class ActivityResetPassword extends AppCompatActivity {
         Button cancelButton = popupView.findViewById(R.id.cancelButton);
 
         okButton.setEnabled(true);
-//        OTPEditText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                okButton.setEnabled(OTPEditText.getText().toString().length() == 6);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
 
         // Set click listener for the OK button
         okButton.setOnClickListener(v -> {

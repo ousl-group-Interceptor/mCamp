@@ -41,6 +41,10 @@ public class SharedVariable {
         mContext = activityAddLocation;
     }
 
+    public SharedVariable(ActivityProfile activityProfile) {
+        mContext = activityProfile;
+    }
+
 
     public void setWhileLogin(String userID, String name, String email, String img, boolean google, boolean facebook) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -50,6 +54,13 @@ public class SharedVariable {
         editor.putBoolean(KEY_Facebook, facebook);
         editor.putString(KEY_Email, email);
         editor.putString(KEY_Name, name);
+        editor.putString(KEY_USER_IMAGE_URI, img);
+        editor.apply();
+    }
+
+    public void seUserImageUri(String img) {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_IMAGE_URI, img);
         editor.apply();
     }
@@ -72,6 +83,13 @@ public class SharedVariable {
     public String getEmail() {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getString(KEY_Email, "unknown");
+    }
+
+    public void setName(String name) {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_Name, name);
+        editor.apply();
     }
 
     public String getName() {
