@@ -83,6 +83,14 @@
     <string name="change_name">Change Name</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="update">Update</string>
+    <string name="clear">CLEAR</string>
+    <string name="cross">Cross</string>
+    <string name="human_art">Human Art</string>
+    <string name="feedback_background">Feedback background</string>
+    <string name="give_us_your_feedback">Give Us Your Feedback!</string>
+    <string name="travel_places">Travel Places</string>
+    <string name="image">Image</string>
+    <string name="search">Search</string>
 
 
 </resources>

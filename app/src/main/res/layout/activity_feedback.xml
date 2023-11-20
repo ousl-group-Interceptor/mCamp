@@ -4,90 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     tools:context=".ActivityFeedback">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="37dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            app:srcCompat="@drawable/baseline_close_24"
-            tools:layout_editor_absoluteY="1dp" />
-
-        <TextView
-            android:layout_width="81dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="CLEAR"
-            android:textSize="22sp"
-            android:textStyle="bold"></TextView>
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/person"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="20dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                app:srcCompat="@drawable/baseline_close_24"
+                tools:layout_editor_absoluteY="1dp"
+                android:contentDescription="@string/cross" />
 
-        </ImageView>
+            <TextView
+                android:layout_width="81dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/clear"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/person"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/human_art"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/give_us_your_feedback"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="@+id/imageView6"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
-
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_width="379dp"
+        android:layout_height="255dp"
+        android:contentDescription="@string/feedback_background"
         android:src="@drawable/feedbackimage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-    </ImageView>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Give Us Your Feedback !"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6">
-
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="348dp"
-        android:layout_height="159dp"
-        android:layout_marginTop="38dp"
-        android:text="Type your feedaback in here"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-    </EditText>
+        android:id="@+id/edit_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Type here"
+        android:background="@drawable/details_border_style"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:minLines="5"
+        android:scrollbars="vertical"
+        tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     <Button
+        android:id="@+id/button2"
         android:layout_width="385dp"
         android:layout_height="78dp"
-        android:layout_marginTop="12dp"
         android:layout_weight="15"
         android:backgroundTint="#000000"
         android:text="@string/signIn"
@@ -96,8 +112,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="UsingOnClickInXml,VisualLintButtonSize,DuplicateSpeakableTextCheck" />
 
 

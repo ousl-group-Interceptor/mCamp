@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -83,8 +84,20 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         header = navigationView.getHeaderView(0);
         loadPersonalDetails();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_menu, menu);
 
+        // Find the menu item by ID
+        MenuItem logoutMenuItem = menu.findItem(R.id.nav_logout);
 
+        if (sharedVariable.getUserID().equals("unknown"))
+            logoutMenuItem.setTitle("Sign Up");
+        else
+            logoutMenuItem.setTitle("Logout");
+
+        return true;
     }
 
     private void loadPersonalDetails() {
@@ -95,13 +108,20 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
     private void getData(boolean[] run) {
         String ID = sharedVariable.getUserID();
-
-        Data.child("Users/" + ID + "/name").addValueEventListener(new ValueEventListener() {
+        ImageView notification = findViewById(R.id.home_notification);
+        Data.child("Users/" + ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
-                    sharedVariable.setName(String.valueOf(dataSnapshot.getValue()));
+                    sharedVariable.setName(String.valueOf(dataSnapshot.child("name").getValue()));
+                    if(dataSnapshot.child("Notification/newNotification").exists()){
+                        if(String.valueOf(dataSnapshot.child("Notification/newNotification").getValue()).equals("true")){
+                            notification.setImageResource(R.drawable.baseline_notifications_active_24);
+                        }else
+                            notification.setImageResource(R.drawable.baseline_notifications_24);
+                    }else
+                        notification.setImageResource(R.drawable.baseline_notifications_24);
                 }
             }
 
@@ -201,7 +221,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
         }
         if (item.getItemId() == R.id.nav_feedback) {
-
+            startActivity(new Intent(this, ActivityFeedback.class));
         }
         if (item.getItemId() == R.id.nav_logout) {
             logOut();
@@ -262,6 +282,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     public void openTravelPlaces(View view) {
+        startActivity(new Intent(this, ActivityTravelPlace.class));
     }
 
     @Override
@@ -270,11 +291,18 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     public void openHandyCrafts(View view) {
+        startActivity(new Intent(this, ActivityHandyCrafts.class));
     }
 
     public void openTransportation(View view) {
+        startActivity(new Intent(this, ActivityTransportation.class));
     }
 
     public void openAccommodation(View view) {
+        startActivity(new Intent(this, ActivityAccommodation.class));
+    }
+
+    public void openNotification(View view) {
+        startActivity(new Intent(this, ActivityNotification.class));
     }
 }

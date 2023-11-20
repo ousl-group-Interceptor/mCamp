@@ -71,14 +71,18 @@
                     android:layout_weight="6" />
 
                 <ImageView
-                    android:id="@+id/search"
+                    android:id="@+id/home_notification"
+                    android:clickable="true"
+                    android:onClick="openNotification"
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:layout_height="50dp"
                     android:padding="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/baseline_search_24"
-                    android:contentDescription="@string/searchIcon" />
+                    android:src="@drawable/baseline_notifications_24"
+                    android:contentDescription="@string/searchIcon"
+                    android:focusable="true"
+                    tools:ignore="UsingOnClickInXml" />
 
                 <View
                     android:layout_width="0dp"

@@ -35,6 +35,7 @@ import java.util.TimeZone;
 
 public class Common {
 
+    public static String locationID;
     private static ProgressDialog progressDialog;
     public static String userID, email, userName;
     public static double[] addingLocation;

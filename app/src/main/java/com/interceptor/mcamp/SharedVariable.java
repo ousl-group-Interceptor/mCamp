@@ -46,6 +46,14 @@ public class SharedVariable {
         mContext = activityProfile;
     }
 
+    public SharedVariable(ActivityTravelPlace activityTravelPlace) {
+        mContext = activityTravelPlace;
+    }
+
+    public SharedVariable(ActivityNotification activityNotification) {
+        mContext = activityNotification;
+    }
+
 
     public void setWhileLogin(String userID, String name, String email, String img, boolean google, boolean facebook) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);

@@ -1,7 +1,6 @@
 package com.interceptor.mcamp;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -181,7 +180,6 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     public void changeName(View view) {
-        Context context = this;
         PopupWindow popupWindow;
         // Inflate the popup window layout
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_change_name, null);
@@ -211,7 +209,7 @@ public class ActivityProfile extends AppCompatActivity {
                 });
             } else {
                 Common.stopLoading();
-                Common.showMessage(context, "Error!", "Please enter your name");
+                Common.showMessage(this, "Error!", "Please enter your name");
             }
         });
 

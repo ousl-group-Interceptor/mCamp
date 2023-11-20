@@ -20,6 +20,9 @@
         android:theme="@style/Theme.MCamp"
         tools:targetApi="31">
         <activity
+            android:name=".DetailsLocation"
+            android:exported="false" />
+        <activity
             android:name=".ActivityProfile"
             android:exported="false" />
         <activity
