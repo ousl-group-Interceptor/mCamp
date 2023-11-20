@@ -305,4 +305,8 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     public void openNotification(View view) {
         startActivity(new Intent(this, ActivityNotification.class));
     }
+
+    public void openSearchMap(View view) {
+        startActivity(new Intent(this, ActivityMapSearchLocation.class));
+    }
 }
