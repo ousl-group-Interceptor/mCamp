@@ -91,6 +91,10 @@
     <string name="travel_places">Travel Places</string>
     <string name="image">Image</string>
     <string name="search">Search</string>
+    <string name="if_you_know_name_enter_here">If you know name enter here</string>
+    <string name="how_much_km_can_you_go_from_pinpoint">How much km can you go from pinpoint?</string>
+    <string name="search_around_here">Search around here</string>
+    <string name="reset">Reset</string>
 
 
 </resources>

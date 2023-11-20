@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,6 +110,8 @@ public class ActivityHandyCrafts extends AppCompatActivity {
                         }
                     }
                     Common.stopLoading();
+                    if (data.size() == 0)
+                        Toast.makeText(ActivityHandyCrafts.this, "Nothing was found", Toast.LENGTH_LONG).show();
                     for (int i = data.size() - 1; i >= 0; i--) {
                         DataSnapshot snapshot = data.get(i);
                         locationAdder(snapshot.getKey(),
