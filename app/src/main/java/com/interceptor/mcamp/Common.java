@@ -45,6 +45,8 @@ public class Common {
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
 
+    public static String currentLocationID;
+
     //addLocationAttribute
     public static List<Uri> imageUris = new ArrayList<>();
     public static String locationName = null, locationDetails = null, keyWords = null;

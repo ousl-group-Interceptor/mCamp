@@ -149,13 +149,12 @@ public class ActivityHandyCrafts extends AppCompatActivity {
             // Decode the byte array to a Bitmap
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             // Display the image in an ImageView
-            Common.userImageBitmap = bitmap;
             viewImage.setImageBitmap(bitmap);
         });
 
         viewImage.setOnClickListener(v -> {
-            Common.locationID = id;
-            startActivity(new Intent(this, DetailsLocation.class));
+            Common.currentLocationID = id;
+            startActivity(new Intent(this, ActivityLocationDetails.class));
         });
 
         // Add the view to the parent container

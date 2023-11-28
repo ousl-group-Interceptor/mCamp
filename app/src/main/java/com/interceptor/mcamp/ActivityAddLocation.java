@@ -73,7 +73,7 @@ public class ActivityAddLocation extends AppCompatActivity {
 
         if (Common.addLocation) {
             imageUris = Common.imageUris;
-            if (imageUris != null)
+            if (imageUris.size() > 0)
                 locationImage.setImageURI(imageUris.get(0));
             if (Common.locationName != null)
                 locationName.setText(Common.locationName);
