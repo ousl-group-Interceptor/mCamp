@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ActivityLocationDetails extends AppCompatActivity implements TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
 
@@ -34,6 +36,9 @@ public class ActivityLocationDetails extends AppCompatActivity implements TabLay
         viewPager.setAdapter(adapter);
         tabLayout.setOnTabSelectedListener(this);
         viewPager.setOnPageChangeListener(this);
+
+        Common.currentLocationData = FirebaseDatabase.getInstance().getReference();
+        FirebaseApp.initializeApp(this);
     }
 
     @Override

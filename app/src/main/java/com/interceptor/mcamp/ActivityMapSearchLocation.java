@@ -104,7 +104,7 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
+            // to handle the case where the user_icon grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
@@ -353,6 +353,7 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
             // Handle info window click here
             // This will be triggered when the info window (title) is clicked
             Common.currentLocationID = id;
+            Common.currentLocationCategory = category;
             startActivity(new Intent(ActivityMapSearchLocation.this, ActivityLocationDetails.class));
         });
 

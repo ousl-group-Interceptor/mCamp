@@ -5,4 +5,11 @@
     <color name="title_background">#FFD9D9D9</color>
     <color name="quick_background">#A9119797</color>
     <color name="theme_color">#FF119797</color>
+    <color name="rating_primary">#FFD700</color>
+    <color name="rating_dark">#979797</color>
+    <color name="bar_excellent">#30BC2E</color>
+    <color name="bar_good">#7AB53F</color>
+    <color name="bar_average">#EAD51B</color>
+    <color name="bar_below">#EB9025</color>
+    <color name="bar_poor">#EA341B</color>
 </resources>

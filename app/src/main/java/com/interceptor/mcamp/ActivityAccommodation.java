@@ -154,6 +154,7 @@ public class ActivityAccommodation extends AppCompatActivity {
 
         viewImage.setOnClickListener(v -> {
             Common.currentLocationID = id;
+            Common.currentLocationCategory = "Accommodation";
             startActivity(new Intent(this, ActivityLocationDetails.class));
         });
 

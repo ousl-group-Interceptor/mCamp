@@ -154,6 +154,7 @@ public class ActivityTransportation extends AppCompatActivity {
 
         viewImage.setOnClickListener(v -> {
             Common.currentLocationID = id;
+            Common.currentLocationCategory = "Transportation";
             startActivity(new Intent(this, ActivityLocationDetails.class));
         });
 

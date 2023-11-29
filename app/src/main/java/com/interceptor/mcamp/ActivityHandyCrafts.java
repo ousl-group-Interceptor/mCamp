@@ -154,6 +154,7 @@ public class ActivityHandyCrafts extends AppCompatActivity {
 
         viewImage.setOnClickListener(v -> {
             Common.currentLocationID = id;
+            Common.currentLocationCategory = "Handy Craft";
             startActivity(new Intent(this, ActivityLocationDetails.class));
         });
 

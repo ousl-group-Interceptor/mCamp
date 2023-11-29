@@ -72,11 +72,11 @@ public class FacebookAuthentication extends ActivitySignIn {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // Sign in success, update UI with the signed-in user_icon's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         assert user != null;
                         updateUI(user, new boolean[]{true});
-                    }  // If sign in fails, display a message to the user.
+                    }  // If sign in fails, display a message to the user_icon.
 
                 });
     }

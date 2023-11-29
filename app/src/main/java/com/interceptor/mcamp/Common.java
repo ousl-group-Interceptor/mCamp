@@ -15,6 +15,7 @@ import android.os.ParcelFileDescriptor;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -45,7 +46,8 @@ public class Common {
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
 
-    public static String currentLocationID;
+    public static String currentLocationID, currentLocationCategory;
+    public static DatabaseReference currentLocationData;
 
     //addLocationAttribute
     public static List<Uri> imageUris = new ArrayList<>();

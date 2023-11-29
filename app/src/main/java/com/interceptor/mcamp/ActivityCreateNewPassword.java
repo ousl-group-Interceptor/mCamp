@@ -102,6 +102,6 @@ public class ActivityCreateNewPassword extends AppCompatActivity {
     private void samePassword() {
         Common.stopLoading();
         Common.showMessage(this, "Policy error!", "Please provide new " +
-                "password. \nYou can not user old Password as new one");
+                "password. \nYou can not user_icon old Password as new one");
     }
 }
