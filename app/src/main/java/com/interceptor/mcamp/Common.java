@@ -25,6 +25,8 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,7 +48,8 @@ public class Common {
     public static int fragmentNumber;
     public static DataSnapshot snapshot = null;
 
-    public static String currentLocationID, currentLocationCategory;
+    public static String currentLocationID, currentLocationCategory, currentLocationComment,
+            mainCommentUserName, mainCommentUserDescription, mainCommentUserID;
     public static DatabaseReference currentLocationData;
 
     //addLocationAttribute
@@ -54,7 +57,7 @@ public class Common {
     public static String locationName = null, locationDetails = null, keyWords = null;
     public static int position = 0;
 
-    public static void resetAddLocationBackup(){
+    public static void resetAddLocationBackup() {
         imageUris = new ArrayList<>();
         locationName = null;
         locationDetails = null;
@@ -166,6 +169,7 @@ public class Common {
         Date now = new Date();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(now);
     }
 
@@ -173,7 +177,37 @@ public class Common {
         Date now = new Date();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(now);
+    }
+
+    @SuppressLint({"NewApi", "LocalSuppress"})
+    public static String[] idToDateTime(String utcTimestamp) {
+//        String utcTimestamp = "202311301830456785460";
+
+        // Get the first 14 characters
+        String utcTimestampString = utcTimestamp.substring(0, Math.min(utcTimestamp.length(), 14));
+
+        // Parse UTC timestamp string to LocalDateTime
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime utcDateTime = LocalDateTime.parse(utcTimestampString, formatter);
+
+        // Convert UTC LocalDateTime to local date and time using the default time zone
+        LocalDateTime localDateTime = utcDateTime.atZone(ZoneId.of("UTC"))
+                .withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+
+        // Format LocalDateTime to desired string formats
+        DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        DateTimeFormatter localTimeFormat = DateTimeFormatter.ofPattern("HH.mm");
+
+        String localDateString = localDateTime.format(localDateFormat);
+        String localTimeString = localDateTime.format(localTimeFormat);
+
+        // Print the local date and time
+//        System.out.println("UTC Timestamp: " + utcTimestampString);
+//        System.out.println("Local Date: " + localDateString);
+//        System.out.println("Local Time: " + localTimeString);
+        return new String[]{localDateString, localTimeString};
     }
 
     public static String convertToDate(String dateTimeStr) throws ParseException {

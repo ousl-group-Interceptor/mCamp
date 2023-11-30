@@ -155,6 +155,17 @@
     </string>
     <string name="submit_review">Submit Review</string>
     <string name="your_review">Your Review</string>
+    <string name="comments">Comments</string>
+    <string name="no_comment_yet">No comment yet.</string>
+    <string name="add_a_new_comment">Add a new comment</string>
+    <string name="hand">hand</string>
+    <string name="_0_liked">0 liked</string>
+    <string name="hart">hart</string>
+    <string name="_0_comment">0 Comment</string>
+    <string name="create_new_comment">Create new comment</string>
+    <string name="enter_your_comment">Enter your comment</string>
+    <string name="_0_reply">0 reply</string>
+    <string name="no_reply_yet">No reply yet</string>
 
 
 </resources>

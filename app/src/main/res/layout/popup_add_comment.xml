@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#CA000000">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="@string/create_new_comment"
+        android:textColor="#2979FF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_your_comment"
+        android:textColor="#9E9E9E" />
+
+    <EditText
+        android:id="@+id/valueEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:hint="@string/type_here"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#9E9E9E"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FF0000"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/cancel"
+            android:textColor="#000000"
+            tools:ignore="ButtonOrder,ButtonStyle" />
+
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00FF00"
+            android:textColor="#000000"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/submit"
+            android:layout_marginStart="8dp"
+            tools:ignore="ButtonOrder,ButtonStyle" />
+    </LinearLayout>
+
+</LinearLayout>

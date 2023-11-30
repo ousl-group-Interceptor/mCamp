@@ -26,6 +26,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FragmentReviews extends Fragment {
 
@@ -133,9 +136,16 @@ public class FragmentReviews extends Fragment {
     }
 
     private void loadReview(int min, int max) {
+        List<DataSnapshot> snapshotList = new ArrayList<>();
+        for (DataSnapshot review : currentLocationReview.getChildren()) {
+            snapshotList.add(review);
+        }
+
+        Collections.reverse(snapshotList);
+
         int counter = 0;
         seeMore.setVisibility(View.GONE);
-        for (DataSnapshot review : currentLocationReview.getChildren()) {
+        for (DataSnapshot reversedReview : snapshotList) {
             counter++;
             if (min > counter) {
                 continue;
@@ -144,15 +154,15 @@ public class FragmentReviews extends Fragment {
                 seeMore.setVisibility(View.VISIBLE);
                 break;
             }
-            reviewAdder(Float.parseFloat(String.valueOf(review.child("Rate").getValue())),
-                    String.valueOf(review.child("Description").getValue()),
-                    String.valueOf(review.child("Date").getValue()),
-                    String.valueOf(review.child("User").getValue()));
+            reviewAdder(Float.parseFloat(String.valueOf(reversedReview.child("Rate").getValue())),
+                    String.valueOf(reversedReview.child("Description").getValue()),
+                    String.valueOf(reversedReview.getKey()),
+                    String.valueOf(reversedReview.child("User").getValue()));
         }
         Common.stopLoading();
     }
 
-    private void reviewAdder(float rate, String description, String date, String user) {
+    private void reviewAdder(float rate, String description, String id, String user) {
         LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.single_review, parentContainer, false);
 
         TextView reviewData = xmlView.findViewById(R.id.review_date);
@@ -161,7 +171,7 @@ public class FragmentReviews extends Fragment {
         ImageView reviewUserImage = xmlView.findViewById(R.id.review_user);
         RatingBar reviewRating = xmlView.findViewById(R.id.rating_bar);
 
-        reviewData.setText(date);
+        reviewData.setText(Common.idToDateTime(id)[0]);
         reviewDescription.setText(description);
         reviewRating.setRating(rate);
         reviewUser.setText(String.valueOf(userList.child(user + "/name").getValue()));
@@ -207,7 +217,6 @@ public class FragmentReviews extends Fragment {
 
             if(String.valueOf(review.child("User").getValue()).equals(sharedVariable.getUserID())){
                 giveRate.setVisibility(View.GONE);
-                break;
             }
 
             if (rating <= 1)
