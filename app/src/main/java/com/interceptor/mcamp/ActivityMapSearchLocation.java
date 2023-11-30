@@ -2,7 +2,10 @@ package com.interceptor.mcamp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -28,6 +31,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.FirebaseApp;
@@ -99,7 +104,7 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
+            // to handle the case where the user_icon grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
@@ -170,7 +175,7 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
         Button okButton = popupView.findViewById(R.id.okButton);
         Button cancelButton = popupView.findViewById(R.id.cancelButton);
 
-        if(popupValues.length==2){
+        if (popupValues.length == 2) {
             searchText.setText(popupValues[0]);
             radiusText.setText(popupValues[1]);
         }
@@ -288,10 +293,11 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
             if (value.equals("")) {
                 double lat = Double.parseDouble(String.valueOf(snapshot.child("Latitude").getValue()));
                 double lon = Double.parseDouble(String.valueOf(snapshot.child("Longitude").getValue()));
+                String name = String.valueOf(snapshot.child("name").getValue());
                 double[] point = {lat, lon};
                 if (Common.getDistance(pinPoint, point) <= Double.parseDouble(distance)) {
                     String id = snapshot.getKey();
-                    addCustomeMarker(lat, lon, category, id);
+                    addCustomMarker(lat, lon, name, category, id);
                 }
             } else {
                 for (DataSnapshot keySnapshot : snapshot.child("KeyWords").getChildren()) {
@@ -299,10 +305,11 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
                             && String.valueOf(keySnapshot.getValue()).compareToIgnoreCase(value) > -3) {
                         double lat = Double.parseDouble(String.valueOf(snapshot.child("Latitude").getValue()));
                         double lon = Double.parseDouble(String.valueOf(snapshot.child("Longitude").getValue()));
+                        String name = String.valueOf(snapshot.child("name").getValue());
                         double[] point = {lat, lon};
                         if (Common.getDistance(pinPoint, point) <= Double.parseDouble(distance)) {
                             String id = snapshot.getKey();
-                            addCustomeMarker(lat, lon, category, id);
+                            addCustomMarker(lat, lon, name, category, id);
                         }
                         break;
                     }
@@ -311,14 +318,47 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
         }
     }
 
-    private void addCustomeMarker(double lat, double lon, String category, String id) {
+    private void addCustomMarker(double lat, double lon, String name, String category, String id) {
         LatLng latLng = new LatLng(lat, lon);
+
+        // Assuming car.png is in the res/drawable directory
+        Bitmap carBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_marker_red_3d);
+        if (category.equals("Place"))
+            carBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_marker_palce);
+        if (category.equals("Accommodation"))
+            carBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_marker_accommodation);
+        if (category.equals("Handy Craft"))
+            carBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_marker_handy_craft);
+        if (category.equals("Transportation"))
+            carBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_marker_car);
+
+        Bitmap resizedCarBitmap = Bitmap.createScaledBitmap(carBitmap, 150, 150, false);
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizedCarBitmap);
+
+        // Add a marker with the custom icon
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title("Center")  // You can set a title for the marker
-                .snippet("Around locations"));  // You can set additional information (snippet) for the marker
+                .title(name)  // You can set a title for the marker
+                //.snippet("Around locations")  // You can set additional information (snippet) for the marker
+                .icon(icon));  // Set the custom icon
+
+        // Add a click listener to the marker
+        mMap.setOnMarkerClickListener(marker -> {
+            // Handle marker click here
+            // You can open a popup, show details, etc.
+            return false;
+        });
+
+        mMap.setOnInfoWindowClickListener(marker -> {
+            // Handle info window click here
+            // This will be triggered when the info window (title) is clicked
+            Common.currentLocationID = id;
+            Common.currentLocationCategory = category;
+            startActivity(new Intent(ActivityMapSearchLocation.this, ActivityLocationDetails.class));
+        });
 
         // Optionally, move the camera to the marker's position
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
+
 }

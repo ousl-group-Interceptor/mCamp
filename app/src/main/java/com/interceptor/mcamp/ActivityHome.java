@@ -165,16 +165,19 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 if (run[0]) {
                     run[0] = false;
                     if (dataSnapshot.exists()) {
-                        storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
-                            // Decode the byte array to a Bitmap
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            // Display the image in an ImageView
-                            Common.userImageBitmap = bitmap;
-                            profileImage.setImageBitmap(bitmap);
-                        });
-                    } else if (sharedVariable.getGoogle() || sharedVariable.getFacebook()) {
-                        getImageBitmap(sharedVariable.getUserImageUri());
-                        profileImage.setImageBitmap(Common.userImageBitmap);
+                        String imageUrl = String.valueOf(dataSnapshot.getValue());
+                        if (imageUrl.startsWith("displayImage/")) {
+                            storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
+                                // Decode the byte array to a Bitmap
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                // Display the image in an ImageView
+                                Common.userImageBitmap = bitmap;
+                                profileImage.setImageBitmap(bitmap);
+                            });
+                        } else {
+                            getImageBitmap(sharedVariable.getUserImageUri());
+                            profileImage.setImageBitmap(Common.userImageBitmap);
+                        }
                     }
                 }
             }

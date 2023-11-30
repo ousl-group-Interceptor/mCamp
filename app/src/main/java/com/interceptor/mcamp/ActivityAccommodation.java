@@ -72,8 +72,6 @@ public class ActivityAccommodation extends AppCompatActivity {
                     for (int i = data.size() - 1; i >= 0; i--) {
                         DataSnapshot snapshot = data.get(i);
                         locationAdder(snapshot.getKey(),
-                                String.valueOf(snapshot.child("Date").getValue()),
-                                String.valueOf(snapshot.child("time").getValue()),
                                 String.valueOf(snapshot.child("name").getValue()),
                                 String.valueOf(snapshot.child("images/1").getValue()));
                     }
@@ -115,8 +113,6 @@ public class ActivityAccommodation extends AppCompatActivity {
                     for (int i = data.size() - 1; i >= 0; i--) {
                         DataSnapshot snapshot = data.get(i);
                         locationAdder(snapshot.getKey(),
-                                String.valueOf(snapshot.child("Date").getValue()),
-                                String.valueOf(snapshot.child("time").getValue()),
                                 String.valueOf(snapshot.child("name").getValue()),
                                 String.valueOf(snapshot.child("images/1").getValue()));
                     }
@@ -131,7 +127,7 @@ public class ActivityAccommodation extends AppCompatActivity {
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    private void locationAdder(String id, String date, String time, String title, String link) {
+    private void locationAdder(String id, String title, String link) {
         // Inflate the XML layout to obtain the view object
         LinearLayout xmlView = (LinearLayout) inflater.inflate(R.layout.single_location, parentContainer, false);
 
@@ -141,21 +137,21 @@ public class ActivityAccommodation extends AppCompatActivity {
         TextView viewTitle = xmlView.findViewById(R.id.location_title);
         ImageView viewImage = xmlView.findViewById(R.id.location_image);
 
-        viewData.setText(date);
-        viewTime.setText(time);
+        viewData.setText(Common.idToDateTime(id)[0]);
+        viewTime.setText(Common.idToDateTime(id)[1]);
         viewTitle.setText(title);
 
         storageRef.child(link).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
             // Decode the byte array to a Bitmap
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             // Display the image in an ImageView
-            Common.userImageBitmap = bitmap;
             viewImage.setImageBitmap(bitmap);
         });
 
         viewImage.setOnClickListener(v -> {
-            Common.locationID = id;
-            startActivity(new Intent(this, DetailsLocation.class));
+            Common.currentLocationID = id;
+            Common.currentLocationCategory = "Accommodation";
+            startActivity(new Intent(this, ActivityLocationDetails.class));
         });
 
         // Add the view to the parent container

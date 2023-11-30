@@ -73,7 +73,7 @@ public class ActivityAddLocation extends AppCompatActivity {
 
         if (Common.addLocation) {
             imageUris = Common.imageUris;
-            if (imageUris != null)
+            if (imageUris.size() > 0)
                 locationImage.setImageURI(imageUris.get(0));
             if (Common.locationName != null)
                 locationName.setText(Common.locationName);
@@ -135,7 +135,7 @@ public class ActivityAddLocation extends AppCompatActivity {
                     // here to request the missing permissions, and then overriding
                     //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
                     //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
+                    // to handle the case where the user_icon grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
                 }
                 locationManager.requestLocationUpdates(
@@ -162,7 +162,7 @@ public class ActivityAddLocation extends AppCompatActivity {
                 // Permission granted, start requesting location updates
                 requestLocationUpdates();
             } else {
-                // Permission denied, handle accordingly (e.g., show a message to the user)
+                // Permission denied, handle accordingly (e.g., show a message to the user_icon)
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
         }
