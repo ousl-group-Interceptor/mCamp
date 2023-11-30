@@ -25,6 +25,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.text.DecimalFormat;
+
 public class FragmentReviews extends Fragment {
 
     private View view;
@@ -36,6 +38,7 @@ public class FragmentReviews extends Fragment {
     private StorageReference storageRef;
     private LinearLayout parentContainer;
     private LayoutInflater layoutInflater;
+    SharedVariable sharedVariable;
     private int min = 1, max = 10;
 
     public FragmentReviews() {
@@ -60,6 +63,8 @@ public class FragmentReviews extends Fragment {
         bar_poor = view.findViewById(R.id.progressBarPoor);
         seeMore = view.findViewById(R.id.see_more);
         giveRate = view.findViewById(R.id.giveRate);
+
+        sharedVariable = new SharedVariable(requireContext());
 
         seeMore.setOnClickListener(v -> seeMore());
         giveRate.setOnClickListener(v -> giveRate());
@@ -199,6 +204,12 @@ public class FragmentReviews extends Fragment {
             noOfReviews++;
             double rating = Double.parseDouble(String.valueOf(review.child("Rate").getValue()));
             sumOfRating += rating;
+
+            if(String.valueOf(review.child("User").getValue()).equals(sharedVariable.getUserID())){
+                giveRate.setVisibility(View.GONE);
+                break;
+            }
+
             if (rating <= 1)
                 poor++;
             else if (rating <= 2)
@@ -210,11 +221,12 @@ public class FragmentReviews extends Fragment {
             else if (rating <= 5)
                 excellent++;
         }
+
         TextView totalReviewString = view.findViewById(R.id.total_number_of_rating);
         TextView ratingRateNumber = view.findViewById(R.id.rating_rate_number);
         String str = "based on " + noOfReviews + " reviews";
 
-        ratingRateNumber.setText(String.valueOf(sumOfRating / noOfReviews));
+        ratingRateNumber.setText(String.valueOf(limitDoubleToOneDecimal(sumOfRating / noOfReviews)));
         rating_bar.setRating(Float.parseFloat(String.valueOf(sumOfRating / noOfReviews)));
         totalReviewString.setText(str);
         bar_excellent.setProgress(excellent * 100 / noOfReviews);
@@ -222,6 +234,11 @@ public class FragmentReviews extends Fragment {
         bar_average.setProgress(average * 100 / noOfReviews);
         bar_below.setProgress(below * 100 / noOfReviews);
         bar_poor.setProgress(poor * 100 / noOfReviews);
+    }
+
+    private double limitDoubleToOneDecimal(double value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        return Double.parseDouble(decimalFormat.format(value));
     }
 
     private void clear() {
