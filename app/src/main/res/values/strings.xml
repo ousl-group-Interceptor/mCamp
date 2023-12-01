@@ -166,6 +166,8 @@
     <string name="enter_your_comment">Enter your comment</string>
     <string name="_0_reply">0 reply</string>
     <string name="no_reply_yet">No reply yet</string>
+    <string name="coin">Coin</string>
+    <string name="_0">0</string>
 
 
 </resources>

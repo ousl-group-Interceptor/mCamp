@@ -29,13 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class ActivityGiveRate extends AppCompatActivity {
 
     private RatingBar rating_bar;
     private EditText description;
     SharedVariable sharedVariable;
     private DatabaseReference Data;
-    private double[] latLon= new double[]{};
+    private double[] latLon = new double[]{};
     private static final double maxRange = 1.0;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
@@ -126,6 +128,7 @@ public class ActivityGiveRate extends AppCompatActivity {
             }
         }
     }
+
     public void cancel(View view) {
         startActivity(new Intent(this, ActivityLocationDetails.class));
         finish();
@@ -183,7 +186,54 @@ public class ActivityGiveRate extends AppCompatActivity {
         Data.child(path).child("Date").setValue(Common.getCDate());
         Data.child(path).child("Description").setValue(String.valueOf(description.getText()));
         Data.child(path).child("Rate").setValue(rating_bar.getRating());
-        Data.child(path).child("User").setValue(sharedVariable.getUserID()).addOnSuccessListener(unused -> showAlert());
+        Data.child(path).child("User").setValue(sharedVariable.getUserID()).addOnSuccessListener(unused -> givePoint(new boolean[]{true}));
+    }
+
+    private void givePoint(boolean[] run) {
+        String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/Points";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    if (dataSnapshot.exists()) {
+                        int point = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                        givePoint(new boolean[]{true}, point);
+                    } else
+                        showAlert();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void givePoint(boolean[] run, int point) {
+        String path = "Users/" + sharedVariable.getUserID() + "/Points";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    if (dataSnapshot.exists()) {
+                        int totalPoint = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString()) + point;
+                        Data.child(path).setValue(totalPoint);
+                        showAlert();
+                    } else {
+                        Data.child(path).setValue(point);
+                        showAlert();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void showAlert() {

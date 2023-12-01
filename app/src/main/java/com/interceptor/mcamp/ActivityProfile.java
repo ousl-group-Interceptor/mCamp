@@ -33,6 +33,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.Objects;
+
 public class ActivityProfile extends AppCompatActivity {
 
     private ImageView profileImage;
@@ -64,6 +66,29 @@ public class ActivityProfile extends AppCompatActivity {
         loadImage();
         loadName();
         loadEmail();
+        loadCoin(new boolean[]{true});
+    }
+
+    private void loadCoin(boolean[] run) {
+        String path = "Users/" + sharedVariable.getUserID() + "/Points";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    if (dataSnapshot.exists()) {
+                        int totalPoint = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                        TextView coinView = findViewById(R.id.coin_count);
+                        coinView.setText(totalPoint);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void loadEmail() {

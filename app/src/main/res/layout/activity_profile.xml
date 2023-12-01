@@ -17,19 +17,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <LinearLayout
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginTop="20dp"
             android:background="@color/title_background"
-            android:text="@string/profile"
             android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            tools:ignore="RtlSymmetry,TextSizeCheck,VisualLintOverlap" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:text="@string/profile"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry,TextSizeCheck,VisualLintOverlap" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/coin"
+                android:src="@drawable/coin"
+                tools:ignore="ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/coin_count"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/_0"
+                android:layout_marginEnd="25dp"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
         <ScrollView
             android:id="@+id/scrollView2"
@@ -84,14 +115,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:onClick="changeName"
                     android:layout_marginTop="25dp"
                     android:background="#20119797"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="changeName"
                     android:orientation="horizontal"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:focusable="true"
                     tools:ignore="UsingOnClickInXml">
 
                     <LinearLayout
@@ -187,14 +218,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:onClick="openMyLocation"
                     android:layout_marginTop="25dp"
                     android:background="#20119797"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openMyLocation"
                     android:orientation="horizontal"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:focusable="true"
                     tools:ignore="UsingOnClickInXml">
 
                     <LinearLayout
@@ -240,14 +271,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:onClick="openMyReview"
                     android:layout_marginTop="25dp"
                     android:background="#20119797"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openMyReview"
                     android:orientation="horizontal"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:focusable="true"
                     tools:ignore="UsingOnClickInXml">
 
                     <LinearLayout
