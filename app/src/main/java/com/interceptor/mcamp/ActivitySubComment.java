@@ -39,8 +39,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ActivitySubComment extends AppCompatActivity {
 
@@ -52,7 +50,6 @@ public class ActivitySubComment extends AppCompatActivity {
     private SharedVariable sharedVariable;
     private DatabaseReference Data;
     private boolean isFunctionBlocked = false;
-    private final int blockTime = 10000;
     private int min = 1, max = 10;
 
     @Override
@@ -361,22 +358,14 @@ public class ActivitySubComment extends AppCompatActivity {
                 isFunctionBlocked = true;
                 String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/Comments/" + Common.currentLocationComment + "/SubComment" + id + "/Likes";
                 if (hart.getVisibility() == View.GONE) {
-                    Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID());
                     hart.setVisibility(View.VISIBLE);
+                    Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID())
+                            .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 } else {
-                    Data.child(path).child(sharedVariable.getUserID()).removeValue();
                     hart.setVisibility(View.GONE);
+                    Data.child(path).child(sharedVariable.getUserID()).removeValue()
+                            .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 }
-
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        isFunctionBlocked = false;
-                        System.out.println("Function unblocked!");
-                        timer.cancel(); // Stop the timer
-                    }
-                }, blockTime);
             } else
                 Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
         });

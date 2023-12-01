@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMapShowLocation">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        map:cameraZoom="15"
+        map:liteMode="false"
+        tools:ignore="FragmentTagUsage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="#00AAFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="openGoogleMapApp"
+        android:padding="15dp"
+        android:text="@string/open_google_map_app"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        tools:ignore="UsingOnClickInXml" />
+
+</RelativeLayout>
