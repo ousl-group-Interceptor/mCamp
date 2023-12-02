@@ -52,6 +52,8 @@ public class Common {
     public static String currentLocationID, currentLocationCategory, currentLocationComment,
             mainCommentUserName, mainCommentUserDescription, mainCommentUserID;
 
+    public static String newAppLink;
+
     public static String[] currentLocationImageUrls;
     public static Bitmap[] currentLocationImageBitmap;
     public static LatLng currentLocationLatLng;

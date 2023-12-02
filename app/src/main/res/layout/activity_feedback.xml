@@ -15,37 +15,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                app:srcCompat="@drawable/baseline_close_24"
-                tools:layout_editor_absoluteY="1dp"
-                android:contentDescription="@string/cross" />
-
-            <TextView
-                android:layout_width="81dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/clear"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:ignore="TextSizeCheck" />
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="openHome"
+                android:orientation="horizontal"
+                tools:ignore="TouchTargetSizeCheck,UseCompoundDrawables,UsingOnClickInXml">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/cross"
+                    app:srcCompat="@drawable/baseline_close_24"
+                    tools:layout_editor_absoluteY="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/clear"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="true"
+                android:contentDescription="@string/human_art"
+                android:focusable="true"
+                android:onClick="openProfile"
                 android:src="@drawable/person"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="20dp"
-                android:contentDescription="@string/human_art"/>
+                tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <ScrollView
@@ -55,64 +66,170 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="379dp"
+                    android:layout_height="255dp"
+                    android:contentDescription="@string/feedback_background"
+                    android:src="@drawable/feedbackimage"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/give_us_your_feedback"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView6"
-                    app:layout_constraintHorizontal_bias="0.502"
-                    app:layout_constraintStart_toStartOf="@+id/imageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/give_us_your"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                        app:layout_constraintHorizontal_bias="0.502"
+                        app:layout_constraintStart_toStartOf="@+id/imageView6"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/feedbacks"
+                        android:textColor="@color/theme_color"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                        app:layout_constraintHorizontal_bias="0.502"
+                        app:layout_constraintStart_toStartOf="@+id/imageView6"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="40dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3" />
+
+                    <ImageView
+                        android:id="@+id/emoji_1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="emoji1"
+                        android:src="@drawable/emoji_1"
+                        tools:ignore="ContentDescription,ImageContrastCheck,UsingOnClickInXml,SpeakableTextPresentCheck" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/emoji_2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="emoji2"
+                        android:src="@drawable/emoji_2"
+                        tools:ignore="ContentDescription,ImageContrastCheck,UsingOnClickInXml,SpeakableTextPresentCheck" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/emoji_3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="emoji3"
+                        android:src="@drawable/emoji_3"
+                        tools:ignore="ContentDescription,ImageContrastCheck,UsingOnClickInXml,SpeakableTextPresentCheck" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/emoji_4"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="emoji4"
+                        android:src="@drawable/emoji_4"
+                        tools:ignore="ContentDescription,ImageContrastCheck,UsingOnClickInXml,SpeakableTextPresentCheck" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edit_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/type_your_feedback_in_here"
+                    android:textColorHint="@color/black"
+                    android:background="@drawable/details_border_style"
+                    android:inputType="textMultiLine"
+                    android:minLines="8"
+                    android:maxLines="50"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:gravity="top|left"
+                    tools:ignore="Autofill,RtlHardcoded,VisualLintTextFieldSize" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:backgroundTint="@color/theme_color"
+                    android:text="@string/submit"
+                    android:onClick="submit"
+                    android:clickable="true"
+                    android:textSize="24sp"
+                    tools:ignore="DuplicateSpeakableTextCheck,InefficientWeight,UsingOnClickInXml,VisualLintButtonSize"
+                    android:focusable="true" />
+
 
             </LinearLayout>
 
         </ScrollView>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="379dp"
-        android:layout_height="255dp"
-        android:contentDescription="@string/feedback_background"
-        android:src="@drawable/feedbackimage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edit_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="Type here"
-        android:background="@drawable/details_border_style"
-        android:gravity="start"
-        android:inputType="textMultiLine"
-        android:textColor="@color/black"
-        android:padding="5dp"
-        android:minLines="5"
-        android:scrollbars="vertical"
-        tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="385dp"
-        android:layout_height="78dp"
-        android:layout_weight="15"
-        android:backgroundTint="#000000"
-        android:text="@string/signIn"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UsingOnClickInXml,VisualLintButtonSize,DuplicateSpeakableTextCheck" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

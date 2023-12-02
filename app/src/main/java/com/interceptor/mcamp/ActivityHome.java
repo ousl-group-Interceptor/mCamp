@@ -218,10 +218,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, ActivityHome.class));
         }
         if (item.getItemId() == R.id.nav_faq) {
-
-        }
-        if (item.getItemId() == R.id.nav_setting) {
-
+            startActivity(new Intent(this, ActivityFAQ.class));
         }
         if (item.getItemId() == R.id.nav_feedback) {
             startActivity(new Intent(this, ActivityFeedback.class));
@@ -230,10 +227,13 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             logOut();
         }
         if (item.getItemId() == R.id.nav_share) {
-
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, Common.newAppLink);
+            startActivity(Intent.createChooser(shareIntent, "Share mCamp using"));
         }
         if (item.getItemId() == R.id.nav_rate) {
-
+            Toast.makeText(this, "Not yet available on PlayStore", Toast.LENGTH_SHORT).show();
         }
         if (!sharedVariable.getUserID().equals("unknown")) {
             if (item.getItemId() == R.id.nav_notification) {

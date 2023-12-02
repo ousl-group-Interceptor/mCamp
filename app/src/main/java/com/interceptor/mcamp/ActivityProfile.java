@@ -252,9 +252,11 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     public void openMyReview(View view) {
+        startActivity(new Intent(this, ActivityMyReviews.class));
     }
 
     public void openMyLocation(View view) {
+        startActivity(new Intent(this, ActivityMyContrbution.class));
     }
 
     @SuppressLint("MissingSuperCall")

@@ -186,6 +186,7 @@ public class ActivityGiveRate extends AppCompatActivity {
         Data.child(path).child("Date").setValue(Common.getCDate());
         Data.child(path).child("Description").setValue(String.valueOf(description.getText()));
         Data.child(path).child("Rate").setValue(rating_bar.getRating());
+        Data.child("Users/"+sharedVariable.getUserID()+"/Reviews/"+Common.currentLocationID).setValue(Common.currentLocationCategory);
         Data.child(path).child("User").setValue(sharedVariable.getUserID()).addOnSuccessListener(unused -> givePoint(new boolean[]{true}));
     }
 

@@ -57,6 +57,7 @@ public class ActivitySplash extends AppCompatActivity {
                         String playStoreLink = Objects.requireNonNull(dataSnapshot
                                 .child("latestVersionLink").getValue()).toString().trim();
                         Common.stopLoading();
+                        Common.newAppLink = playStoreLink;
 
                         // Check if the link is a Play Store link
                         if (isPlayStoreLink(playStoreLink)) {
