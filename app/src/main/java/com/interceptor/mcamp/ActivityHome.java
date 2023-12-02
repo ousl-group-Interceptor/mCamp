@@ -227,7 +227,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.nav_share) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, Common.newAppLink);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Join with mCamp. New Travel Net.\nDownload now: "+Common.newAppLink);
             startActivity(Intent.createChooser(shareIntent, "Share mCamp using"));
         }
         if (item.getItemId() == R.id.nav_rate) {

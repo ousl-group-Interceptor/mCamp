@@ -130,7 +130,7 @@ public class FragmentOverView extends Fragment {
     private void loadImage() {
         int[] loop = new int[]{0};
         for (String imageUrl : Common.currentLocationImageUrls) {
-            LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.single_image, parentContainer, false);
+            LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.individual_image, parentContainer, false);
             ImageView locationImage = xmlView.findViewById(R.id.location_single_image);
 
             gestureDetector = new GestureDetector(getActivity(), new GestureListener());

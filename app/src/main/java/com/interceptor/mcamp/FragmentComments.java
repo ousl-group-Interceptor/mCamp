@@ -158,7 +158,7 @@ public class FragmentComments extends Fragment {
     }
 
     private void commentAdder(String id, String user, String comment) {
-        LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.single_comment, parentContainer, false);
+        LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.individual_comment, parentContainer, false);
 
         TextView commentUser = xmlView.findViewById(R.id.user_name);
         TextView commentDescription = xmlView.findViewById(R.id.user_comment_description);

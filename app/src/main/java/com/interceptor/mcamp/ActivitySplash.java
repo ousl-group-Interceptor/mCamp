@@ -52,12 +52,12 @@ public class ActivitySplash extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
+                    String playStoreLink = Objects.requireNonNull(dataSnapshot
+                            .child("latestVersionLink").getValue()).toString().trim();
+                    Common.newAppLink = playStoreLink;
                     if (Double.parseDouble((String) Objects.requireNonNull(dataSnapshot
                             .child("latestVersion").getValue())) > sharedVariable.getVersion()) {
-                        String playStoreLink = Objects.requireNonNull(dataSnapshot
-                                .child("latestVersionLink").getValue()).toString().trim();
                         Common.stopLoading();
-                        Common.newAppLink = playStoreLink;
 
                         // Check if the link is a Play Store link
                         if (isPlayStoreLink(playStoreLink)) {

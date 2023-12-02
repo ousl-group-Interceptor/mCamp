@@ -177,6 +177,10 @@
     <string name="give_us_your">Give Us Your</string>
     <string name="feedbacks">Feedback !</string>
     <string name="type_your_feedback_in_here">Type your feedback in here</string>
+    <string name="question">Question</string>
+    <string name="reply">Reply</string>
+    <string name="ask_question">Ask question</string>
+    <string name="enter_your_question">Enter your question</string>
 
 
 </resources>
