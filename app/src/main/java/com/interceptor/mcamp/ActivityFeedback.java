@@ -1,6 +1,7 @@
 package com.interceptor.mcamp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -54,7 +55,7 @@ public class ActivityFeedback extends AppCompatActivity {
 
         Data.child(path).child("User").setValue(new SharedVariable(this).getUserID());
         Data.child(path).child("HappyLevel").setValue(happyValue);
-        Data.child(path).child("Feedback").setValue(feedback.getText().toString()).addOnSuccessListener(unused -> Common.stopLoading());
+        Data.child(path).child("Feedback").setValue(feedback.getText().toString()).addOnSuccessListener(unused -> showAlert());
     }
     public void emoji1(View view) {
         happyValue = 1;
@@ -115,5 +116,17 @@ public class ActivityFeedback extends AppCompatActivity {
         layoutParams.width = x;
         layoutParams.height = y;
         emoji4.setLayoutParams(layoutParams);
+    }
+
+    public void showAlert() {
+        Common.stopLoading();
+        new AlertDialog.Builder(this)
+                .setTitle("Complete")
+                .setMessage("Feedback added successfully.")
+                .setPositiveButton("Ok", (dialog, which) -> {
+                    startActivity(new Intent(this, ActivityHome.class));
+                    finish();
+                })
+                .show();
     }
 }

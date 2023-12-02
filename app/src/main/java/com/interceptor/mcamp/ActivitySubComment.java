@@ -70,6 +70,10 @@ public class ActivitySubComment extends AppCompatActivity {
         seeMore = findViewById(R.id.see_more);
         LinearLayout addComment = findViewById(R.id.addComment);
 
+        if(sharedVariable.getUserID().equals("unknown")){
+            addComment.setVisibility(View.GONE);
+        }
+
         seeMore.setOnClickListener(v -> seeMore());
         addComment.setOnClickListener(v -> addComment());
 

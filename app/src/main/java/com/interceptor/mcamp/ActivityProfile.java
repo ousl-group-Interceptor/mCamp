@@ -100,13 +100,11 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     private void loadImage() {
-        if (!sharedVariable.getUserImageUri().equals("unknown")) {
             if (Common.userImageBitmap == null) {
                 loadImage(new boolean[]{true});
             } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
-        }
     }
 
     private void loadImage(boolean[] run) {

@@ -146,14 +146,12 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadPersonalDetailsImage() {
-        if (!sharedVariable.getUserImageUri().equals("unknown")) {
             profileImage = header.findViewById(R.id.profile_picture);
             if (Common.userImageBitmap == null) {
                 loadImage(new boolean[]{true});
             } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
-        }
     }
 
     private void loadImage(boolean[] run) {

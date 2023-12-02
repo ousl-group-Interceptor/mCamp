@@ -75,6 +75,10 @@ public class FragmentComments extends Fragment {
         seeMore.setOnClickListener(v -> seeMore());
         addComment.setOnClickListener(v -> addComment());
 
+        if(sharedVariable.getUserID().equals("unknown")){
+            addComment.setVisibility(View.GONE);
+        }
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         parentContainer = view.findViewById(R.id.users_comment);

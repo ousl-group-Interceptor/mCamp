@@ -91,10 +91,12 @@ public class ActivitySplash extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+            finishAffinity();
         } else {
             // Handle if the Play Store app is not installed
             Toast.makeText(this, "Play Store app not installed", Toast.LENGTH_SHORT).show();
             openLinkInBrowser(playStoreLink);
+            finishAffinity();
         }
     }
 
@@ -104,9 +106,11 @@ public class ActivitySplash extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+            finishAffinity();
         } else {
             // Handle if no app is available to handle the link
             Toast.makeText(this, "No app available to handle the link", Toast.LENGTH_SHORT).show();
+            finishAffinity();
         }
     }
 
