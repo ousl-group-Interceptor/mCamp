@@ -23,7 +23,7 @@
             android:name=".ActivityMyReviews"
             android:exported="false" />
         <activity
-            android:name=".ActivityMyContrbution"
+            android:name=".ActivityMyContribution"
             android:exported="false" />
         <activity
             android:name=".ActivityFAQ"

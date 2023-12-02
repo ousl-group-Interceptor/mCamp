@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginTop="15dp"
-        android:background="#9D9D9D"
+        android:background="@color/title_background"
         android:paddingTop="2dp"
         android:text="@string/faq"
         android:textAlignment="center"

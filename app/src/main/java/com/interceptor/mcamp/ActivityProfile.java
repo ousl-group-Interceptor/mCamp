@@ -254,7 +254,7 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     public void openMyLocation(View view) {
-        startActivity(new Intent(this, ActivityMyContrbution.class));
+        startActivity(new Intent(this, ActivityMyContribution.class));
     }
 
     @SuppressLint("MissingSuperCall")

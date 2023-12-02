@@ -48,7 +48,6 @@ public class ActivityNotification extends AppCompatActivity {
     }
 
     private void load(boolean[] run) {
-        clear();
         Common.startLoading(this, "Loading...");
         Data.child("Users/" + ID + "/Notification/Notification").addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,7 +61,7 @@ public class ActivityNotification extends AppCompatActivity {
                         }
 
                         Collections.reverse(snapshotList);
-
+                        clear();
                         for (DataSnapshot reversedNotification : snapshotList) {
                             addNotification(Common.idToDateTime(Objects.requireNonNull(reversedNotification.getKey()))[0],
                                     Common.idToDateTime(reversedNotification.getKey())[1],

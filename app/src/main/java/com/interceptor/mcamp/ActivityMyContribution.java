@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class ActivityMyReviews extends AppCompatActivity {
+public class ActivityMyContribution extends AppCompatActivity {
 
     private LinearLayout parentContainer;
     private LayoutInflater layoutInflater;
@@ -40,7 +40,7 @@ public class ActivityMyReviews extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_reviews);
+        setContentView(R.layout.activity_my_contrbution);
 
         Data = FirebaseDatabase.getInstance().getReference();
         FirebaseApp.initializeApp(this);
@@ -57,7 +57,7 @@ public class ActivityMyReviews extends AppCompatActivity {
 
     private void checkData(boolean[] run) {
         Common.startLoading(this, "Loading...");
-        String path = "Users/" + sharedVariable.getUserID() + "/Reviews";
+        String path = "Users/" + sharedVariable.getUserID() + "/Locations";
         Data.child(path).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

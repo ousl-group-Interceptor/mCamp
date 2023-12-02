@@ -67,7 +67,8 @@ public class ActivityFAQ extends AppCompatActivity {
                                     Objects.requireNonNull(reversedFAQ.child("Answer").getValue()).toString());
                         }
                         Common.stopLoading();
-                    }
+                    }else
+                        Common.stopLoading();
                 }
             }
 
