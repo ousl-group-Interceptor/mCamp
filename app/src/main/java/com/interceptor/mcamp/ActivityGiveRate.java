@@ -242,7 +242,7 @@ public class ActivityGiveRate extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Complete")
                 .setMessage("Review added successfully.")
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setPositiveButton("Ok", (dialog, which) -> {
                     startActivity(new Intent(this, ActivityLocationDetails.class));
                     finish();
                 })
