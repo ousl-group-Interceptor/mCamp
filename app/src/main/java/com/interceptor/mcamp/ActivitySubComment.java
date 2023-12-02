@@ -342,6 +342,7 @@ public class ActivitySubComment extends AppCompatActivity {
         TextView likeCount = xmlView.findViewById(R.id.like_count);
         LinearLayout likeButton = xmlView.findViewById(R.id.like);
         ImageView hart = xmlView.findViewById(R.id.hart);
+        int[] localCount = new int[]{0};
 
         if (currentLocationSubComments.child(id).child("Likes").exists()) {
             int count = 0;
@@ -351,6 +352,7 @@ public class ActivitySubComment extends AppCompatActivity {
                     hart.setVisibility(View.VISIBLE);
                 }
             }
+            localCount[0] = count;
             likeCount.setText(count + " liked");
         }
         likeButton.setOnClickListener(v -> {
@@ -359,13 +361,16 @@ public class ActivitySubComment extends AppCompatActivity {
                 String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/Comments/" + Common.currentLocationComment + "/SubComment" + id + "/Likes";
                 if (hart.getVisibility() == View.GONE) {
                     hart.setVisibility(View.VISIBLE);
+                    localCount[0]++;
                     Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID())
                             .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 } else {
                     hart.setVisibility(View.GONE);
+                    localCount[0]--;
                     Data.child(path).child(sharedVariable.getUserID()).removeValue()
                             .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 }
+                likeCount.setText(localCount[0] + " liked");
             } else
                 Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
         });

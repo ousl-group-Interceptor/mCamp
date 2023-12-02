@@ -222,6 +222,7 @@ public class FragmentComments extends Fragment {
         TextView likeCount = xmlView.findViewById(R.id.like_count);
         LinearLayout likeButton = xmlView.findViewById(R.id.like);
         ImageView hart = xmlView.findViewById(R.id.hart);
+        int[] localCount = new int[]{0};
 
         if (currentLocationComments.child(id).child("Likes").exists()) {
             int count = 0;
@@ -231,22 +232,25 @@ public class FragmentComments extends Fragment {
                     hart.setVisibility(View.VISIBLE);
                 }
             }
+            localCount[0] = count;
             likeCount.setText(count + " liked");
         }
         likeButton.setOnClickListener(v -> {
             if (!isFunctionBlocked) {
                 isFunctionBlocked = true;
+                String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID +"/Comments/"+ id +"/Likes";
                 if (hart.getVisibility() == View.GONE) {
-                    String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID +"/Comments/"+ id +"/Likes";
                     hart.setVisibility(View.VISIBLE);
+                    localCount[0]++;
                     Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID())
                             .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 } else {
-                    String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID +"/Comments/"+ id +"/Likes";
                     hart.setVisibility(View.GONE);
+                    localCount[0]--;
                     Data.child(path).child(sharedVariable.getUserID()).removeValue()
                             .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 }
+                likeCount.setText(localCount[0] + " liked");
             }else
                 Toast.makeText(requireContext(), "Please wait...", Toast.LENGTH_SHORT).show();
         });
