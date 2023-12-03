@@ -20,6 +20,25 @@
         android:theme="@style/Theme.MCamp"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityMyReviews"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityMyContribution"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityMapShowLocation"
+            android:exported="false">
+            <meta-data
+                android:name="com.google.android.gms.maps.v2.API_KEY"
+                android:value="@string/google_maps_key" />
+        </activity>
+        <activity
+            android:name=".ActivityFullscreenImage"
+            android:exported="false" />
+        <activity
             android:name=".ActivitySubComment"
             android:exported="false" />
         <activity

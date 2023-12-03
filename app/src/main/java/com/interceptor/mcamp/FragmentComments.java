@@ -41,8 +41,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class FragmentComments extends Fragment {
 
@@ -54,7 +52,6 @@ public class FragmentComments extends Fragment {
     private SharedVariable sharedVariable;
     private DatabaseReference Data;
     private boolean isFunctionBlocked = false;
-    private final int blockTime = 10000;
     private int min = 1, max = 10;
 
     public FragmentComments() {
@@ -77,6 +74,10 @@ public class FragmentComments extends Fragment {
 
         seeMore.setOnClickListener(v -> seeMore());
         addComment.setOnClickListener(v -> addComment());
+
+        if(sharedVariable.getUserID().equals("unknown")){
+            addComment.setVisibility(View.GONE);
+        }
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -157,7 +158,7 @@ public class FragmentComments extends Fragment {
     }
 
     private void commentAdder(String id, String user, String comment) {
-        LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.single_comment, parentContainer, false);
+        LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.individual_comment, parentContainer, false);
 
         TextView commentUser = xmlView.findViewById(R.id.user_name);
         TextView commentDescription = xmlView.findViewById(R.id.user_comment_description);
@@ -225,6 +226,7 @@ public class FragmentComments extends Fragment {
         TextView likeCount = xmlView.findViewById(R.id.like_count);
         LinearLayout likeButton = xmlView.findViewById(R.id.like);
         ImageView hart = xmlView.findViewById(R.id.hart);
+        int[] localCount = new int[]{0};
 
         if (currentLocationComments.child(id).child("Likes").exists()) {
             int count = 0;
@@ -234,30 +236,25 @@ public class FragmentComments extends Fragment {
                     hart.setVisibility(View.VISIBLE);
                 }
             }
+            localCount[0] = count;
             likeCount.setText(count + " liked");
         }
         likeButton.setOnClickListener(v -> {
             if (!isFunctionBlocked) {
                 isFunctionBlocked = true;
+                String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID +"/Comments/"+ id +"/Likes";
                 if (hart.getVisibility() == View.GONE) {
-                    String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID +"/Comments/"+ id +"/Likes";
-                    Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID());
                     hart.setVisibility(View.VISIBLE);
+                    localCount[0]++;
+                    Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID())
+                            .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 } else {
-                    String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID +"/Comments/"+ id +"/Likes";
-                    Data.child(path).child(sharedVariable.getUserID()).removeValue();
                     hart.setVisibility(View.GONE);
+                    localCount[0]--;
+                    Data.child(path).child(sharedVariable.getUserID()).removeValue()
+                            .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 }
-
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        isFunctionBlocked = false;
-                        System.out.println("Function unblocked!");
-                        timer.cancel(); // Stop the timer
-                    }
-                }, blockTime);
+                likeCount.setText(localCount[0] + " liked");
             }else
                 Toast.makeText(requireContext(), "Please wait...", Toast.LENGTH_SHORT).show();
         });

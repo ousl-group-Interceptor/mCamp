@@ -3,6 +3,7 @@
     android:id="@+id/one_notification"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#65119797"
     android:orientation="vertical">
 
     <LinearLayout
@@ -63,7 +64,7 @@
             <ImageView
                 android:id="@+id/location_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:clickable="true"
                 android:contentDescription="@string/image"
                 android:focusable="true"
@@ -76,4 +77,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"/>
+
 </LinearLayout>

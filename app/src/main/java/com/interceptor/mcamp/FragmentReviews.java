@@ -72,6 +72,10 @@ public class FragmentReviews extends Fragment {
         seeMore.setOnClickListener(v -> seeMore());
         giveRate.setOnClickListener(v -> giveRate());
 
+        if(sharedVariable.getUserID().equals("unknown")){
+            giveRate.setVisibility(View.GONE);
+        }
+
         rating_bar.setRating(0.0f);
         bar_excellent.setProgress(0);
         bar_good.setProgress(0);

@@ -130,7 +130,7 @@ public class ActivityTravelPlace extends AppCompatActivity {
     @SuppressLint("QueryPermissionsNeeded")
     private void locationAdder(String id, String title, String link) {
         // Inflate the XML layout to obtain the view object
-        LinearLayout xmlView = (LinearLayout) inflater.inflate(R.layout.single_location, parentContainer, false);
+        LinearLayout xmlView = (LinearLayout) inflater.inflate(R.layout.individual_location, parentContainer, false);
 
         // Customize the view or set data to it
         TextView viewData = xmlView.findViewById(R.id.location_date);

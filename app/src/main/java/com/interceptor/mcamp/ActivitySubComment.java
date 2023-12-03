@@ -39,8 +39,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ActivitySubComment extends AppCompatActivity {
 
@@ -52,7 +50,6 @@ public class ActivitySubComment extends AppCompatActivity {
     private SharedVariable sharedVariable;
     private DatabaseReference Data;
     private boolean isFunctionBlocked = false;
-    private final int blockTime = 10000;
     private int min = 1, max = 10;
 
     @Override
@@ -72,6 +69,10 @@ public class ActivitySubComment extends AppCompatActivity {
 
         seeMore = findViewById(R.id.see_more);
         LinearLayout addComment = findViewById(R.id.addComment);
+
+        if(sharedVariable.getUserID().equals("unknown")){
+            addComment.setVisibility(View.GONE);
+        }
 
         seeMore.setOnClickListener(v -> seeMore());
         addComment.setOnClickListener(v -> addComment());
@@ -246,7 +247,7 @@ public class ActivitySubComment extends AppCompatActivity {
     }
 
     private void commentAdder(String id, String user, String comment) {
-        LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.single_comment, parentContainer, false);
+        LinearLayout xmlView = (LinearLayout) layoutInflater.inflate(R.layout.individual_comment, parentContainer, false);
 
         TextView commentUser = xmlView.findViewById(R.id.user_name);
         TextView commentDescription = xmlView.findViewById(R.id.user_comment_description);
@@ -345,6 +346,7 @@ public class ActivitySubComment extends AppCompatActivity {
         TextView likeCount = xmlView.findViewById(R.id.like_count);
         LinearLayout likeButton = xmlView.findViewById(R.id.like);
         ImageView hart = xmlView.findViewById(R.id.hart);
+        int[] localCount = new int[]{0};
 
         if (currentLocationSubComments.child(id).child("Likes").exists()) {
             int count = 0;
@@ -354,6 +356,7 @@ public class ActivitySubComment extends AppCompatActivity {
                     hart.setVisibility(View.VISIBLE);
                 }
             }
+            localCount[0] = count;
             likeCount.setText(count + " liked");
         }
         likeButton.setOnClickListener(v -> {
@@ -361,22 +364,17 @@ public class ActivitySubComment extends AppCompatActivity {
                 isFunctionBlocked = true;
                 String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/Comments/" + Common.currentLocationComment + "/SubComment" + id + "/Likes";
                 if (hart.getVisibility() == View.GONE) {
-                    Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID());
                     hart.setVisibility(View.VISIBLE);
+                    localCount[0]++;
+                    Data.child(path).child(sharedVariable.getUserID()).setValue(sharedVariable.getUserID())
+                            .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 } else {
-                    Data.child(path).child(sharedVariable.getUserID()).removeValue();
                     hart.setVisibility(View.GONE);
+                    localCount[0]--;
+                    Data.child(path).child(sharedVariable.getUserID()).removeValue()
+                            .addOnSuccessListener(unused -> isFunctionBlocked = false);
                 }
-
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        isFunctionBlocked = false;
-                        System.out.println("Function unblocked!");
-                        timer.cancel(); // Stop the timer
-                    }
-                }, blockTime);
+                likeCount.setText(localCount[0] + " liked");
             } else
                 Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
         });

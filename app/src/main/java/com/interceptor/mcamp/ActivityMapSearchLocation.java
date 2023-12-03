@@ -34,6 +34,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -336,11 +337,14 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
         BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizedCarBitmap);
 
         // Add a marker with the custom icon
-        mMap.addMarker(new MarkerOptions()
+        // Add a marker with the custom icon
+        Marker currentMarker = mMap.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title(name)  // You can set a title for the marker
-                //.snippet("Around locations")  // You can set additional information (snippet) for the marker
-                .icon(icon));  // Set the custom icon
+                .title(name)
+                .icon(icon));
+
+        // Set tag information for the marker
+        currentMarker.setTag(new MarkerTag(id, category));
 
         // Add a click listener to the marker
         mMap.setOnMarkerClickListener(marker -> {
@@ -352,13 +356,37 @@ public class ActivityMapSearchLocation extends AppCompatActivity implements OnMa
         mMap.setOnInfoWindowClickListener(marker -> {
             // Handle info window click here
             // This will be triggered when the info window (title) is clicked
-            Common.currentLocationID = id;
-            Common.currentLocationCategory = category;
-            startActivity(new Intent(ActivityMapSearchLocation.this, ActivityLocationDetails.class));
+
+            // Use a different variable name for the marker
+
+            MarkerTag markerTag = (MarkerTag) marker.getTag();
+            if (markerTag != null) {
+                Common.currentLocationID = markerTag.getId();
+                Common.currentLocationCategory = markerTag.getCategory();
+                startActivity(new Intent(ActivityMapSearchLocation.this, ActivityLocationDetails.class));
+            }
         });
 
         // Optionally, move the camera to the marker's position
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
 
+}
+
+class MarkerTag {
+    private final String id;
+    private final String category;
+
+    public MarkerTag(String id, String category) {
+        this.id = id;
+        this.category = category;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
 }

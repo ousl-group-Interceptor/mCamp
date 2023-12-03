@@ -166,6 +166,24 @@
     <string name="enter_your_comment">Enter your comment</string>
     <string name="_0_reply">0 reply</string>
     <string name="no_reply_yet">No reply yet</string>
+    <string name="coin">Coin</string>
+    <string name="_0">0</string>
+    <string name="over_view">Over View</string>
+    <string name="location_name">Location Name</string>
+    <string name="_2020_01_01">2020.01.01</string>
+    <string name="_12_12">12.12</string>
+    <string name="show_in_map">Show in map</string>
+    <string name="open_google_map_app">Open Google Map App</string>
+    <string name="give_us_your">Give Us Your</string>
+    <string name="feedbacks">Feedback !</string>
+    <string name="type_your_feedback_in_here">Type your feedback in here</string>
+    <string name="question">Question</string>
+    <string name="reply">Reply</string>
+    <string name="ask_question">Ask question</string>
+    <string name="enter_your_question">Enter your question</string>
+    <string name="no_contribution_yet_n_add_new_location_for_contribution">No contribution yet.\n Add new location for Contribution.</string>
+    <string name="no_reviews_yet">No Reviews yet.</string>
+    <string name="double_tap_an_image_to_maximize">Double-tap an image to maximize.</string>
 
 
 </resources>

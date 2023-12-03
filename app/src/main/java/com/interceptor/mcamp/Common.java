@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
@@ -50,6 +51,12 @@ public class Common {
 
     public static String currentLocationID, currentLocationCategory, currentLocationComment,
             mainCommentUserName, mainCommentUserDescription, mainCommentUserID;
+
+    public static String newAppLink;
+
+    public static String[] currentLocationImageUrls;
+    public static Bitmap[] currentLocationImageBitmap;
+    public static LatLng currentLocationLatLng;
     public static DatabaseReference currentLocationData;
 
     //addLocationAttribute
