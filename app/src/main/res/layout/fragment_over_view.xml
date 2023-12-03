@@ -163,6 +163,20 @@
                     android:focusable="true" />
 
                 <TextView
+                    android:id="@+id/approve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/approve"
+                    android:textColor="#00FF00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck,TextContrastCheck,TouchTargetSizeCheck" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"

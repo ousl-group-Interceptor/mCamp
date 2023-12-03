@@ -1,25 +1,34 @@
 package com.interceptor.mcamp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,8 +41,10 @@ public class FragmentOverView extends Fragment {
     private LayoutInflater layoutInflater;
     private StorageReference storageRef;
     private View view;
+    private DatabaseReference Data;
     private GestureDetector gestureDetector;
     private int imageCount;
+    private final int[] newCoin = {0};
 
     public FragmentOverView() {
     }
@@ -50,14 +61,151 @@ public class FragmentOverView extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_over_view, container, false);
 
+        Data = FirebaseDatabase.getInstance().getReference();
+        FirebaseApp.initializeApp(requireContext());
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         parentContainer = view.findViewById(R.id.location_images);
         layoutInflater = LayoutInflater.from(requireContext());
+        TextView approve = view.findViewById(R.id.approve);
 
+        approve.setOnClickListener(v -> approve(new boolean[]{true}));
         loadData(new boolean[]{true});
 
         return view;
+    }
+
+    private void approve(boolean[] run) {
+        PopupWindow popupWindow;
+        // Inflate the popup window layout
+        @SuppressLint("InflateParams")
+        View popupView = getLayoutInflater().inflate(R.layout.popup_approve, null);
+        popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        // Find the views within the popup window layout
+        EditText coinEditText = popupView.findViewById(R.id.valueEditText);
+        Button okButton = popupView.findViewById(R.id.okButton);
+        Button cancelButton = popupView.findViewById(R.id.cancelButton);
+
+        okButton.setEnabled(true);
+
+        // Set click listener for the OK button
+        okButton.setOnClickListener(v -> {
+            Common.startLoading(requireContext(), "Loading...");
+            String point = coinEditText.getText().toString();
+            // Handle the nickname input as needed
+            if (!point.equals("")) {
+                int intPoint = Integer.parseInt(point);
+                @SuppressLint("DefaultLocale")
+                String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/Points";
+                Data.child(path).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (run[0]) {
+                            run[0] = false;
+                            if (dataSnapshot.exists()) {
+                                int oldPoint = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                                newCoin[0] = intPoint - oldPoint;
+                            } else {
+                                newCoin[0] = intPoint;
+                            }
+                            Data.child(path).setValue(intPoint).addOnSuccessListener(unused -> giveNewPoint());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        // Set click listener for the Cancel button
+        cancelButton.setOnClickListener(v -> popupWindow.dismiss());
+
+        // Create the popup window
+        popupWindow.setFocusable(true);
+
+        // Show the popup window at the center of the screen
+        popupWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+    }
+
+    private void giveNewPoint() {
+        giveNewPointToAdder(new boolean[]{true});
+        giveNewPointToReview(new boolean[]{true});
+        showAlert();
+    }
+
+    private void giveNewPointToReview(boolean[] run) {
+        String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/User";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    String user = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                    givePoint(new boolean[]{true}, newCoin[0], user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void giveNewPointToAdder(boolean[] run) {
+        String path = "Locations/" + Common.currentLocationCategory + "/" + Common.currentLocationID + "/Reviews";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    for (DataSnapshot review : dataSnapshot.getChildren()){
+                        String user = Objects.requireNonNull(review.child("User").getValue()).toString();
+                        givePoint(new boolean[]{true}, newCoin[0], user);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void givePoint(boolean[] run, int point, String user) {
+        String path = "Users/" + user + "/Points";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    if (dataSnapshot.exists()) {
+                        int totalPoint = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString()) + point;
+                        Data.child(path).setValue(totalPoint);
+                    } else {
+                        Data.child(path).setValue(point);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void showAlert() {
+        Common.stopLoading();
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Complete")
+                .setMessage("Point update successfully.")
+                .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
     // Custom GestureListener class to handle double taps
@@ -123,7 +271,7 @@ public class FragmentOverView extends Fragment {
             }
         });
 
-        showInMap.setOnClickListener(v->startActivity(new Intent(requireContext(), ActivityMapShowLocation.class)));
+        showInMap.setOnClickListener(v -> startActivity(new Intent(requireContext(), ActivityMapShowLocation.class)));
     }
 
     @SuppressLint("ClickableViewAccessibility")
