@@ -364,6 +364,7 @@ public class ActivityAddLocation extends AppCompatActivity {
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("name").setValue(stringLocationName);
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("time").setValue(Common.getCTime());
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("Date").setValue(Common.getCDate());
+        Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("User").setValue(ID);
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("Latitude").setValue(locationCoordinates[0]);
         Data.child("Locations/" + selectedCategory + "/" + newLocationID).child("Longitude").setValue(locationCoordinates[1]);
         int i = 0;
