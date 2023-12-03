@@ -146,14 +146,14 @@ public class ActivityGiveRate extends AppCompatActivity {
         handler.postDelayed(() -> {
             if (latLon.length > 1) {
                 double range = Common.getDistance(latLon, locationCoordinates);
-                if (range <= maxRange)
-                    submit();
-                else {
-                    Common.stopLoading();
-                    String msg = "You in out of range to location.\nMaximum distance between you and" +
-                            " location is " + maxRange + "km.";
-                    Common.showMessage(ActivityGiveRate.this, "Out of range.", msg);
-                }
+//                if (range <= maxRange)
+                submit();
+//                else {
+//                    Common.stopLoading();
+//                    String msg = "You in out of range to location.\nMaximum distance between you and" +
+//                            " location is " + maxRange + "km.";
+//                    Common.showMessage(ActivityGiveRate.this, "Out of range.", msg);
+//                }
             } else {
                 GPSCheck(locationCoordinates);
             }
@@ -186,7 +186,7 @@ public class ActivityGiveRate extends AppCompatActivity {
         Data.child(path).child("Date").setValue(Common.getCDate());
         Data.child(path).child("Description").setValue(String.valueOf(description.getText()));
         Data.child(path).child("Rate").setValue(rating_bar.getRating());
-        Data.child("Users/"+sharedVariable.getUserID()+"/Reviews/"+Common.currentLocationID).setValue(Common.currentLocationCategory);
+        Data.child("Users/" + sharedVariable.getUserID() + "/Reviews/" + Common.currentLocationID).setValue(Common.currentLocationCategory);
         Data.child(path).child("User").setValue(sharedVariable.getUserID()).addOnSuccessListener(unused -> givePoint(new boolean[]{true}));
     }
 

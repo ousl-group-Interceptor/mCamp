@@ -283,8 +283,8 @@ public class ActivityAddLocation extends AppCompatActivity {
         String stringKeyWords = String.valueOf(keyWords.getText());
         keyWordsList = stringKeyWords.split(", ");
         if (locationCoordinates.length == 2) {
-            if (checkRange())
-                createLocation();
+            //if (checkRange())
+            createLocation();
         } else {
             Common.stopLoading();
             Common.showMessage(this, "Location Not found", "Location not found please select.");
