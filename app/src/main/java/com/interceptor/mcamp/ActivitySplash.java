@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class ActivitySplash extends AppCompatActivity {
 
-    private boolean loading = true;
+    private boolean loading = true, latestVersion = true;
     SharedVariable sharedVariable;
 
     @Override
@@ -59,6 +59,7 @@ public class ActivitySplash extends AppCompatActivity {
                             .child("latestVersion").getValue())) > sharedVariable.getVersion()) {
                         Common.stopLoading();
 
+                        latestVersion = false;
                         // Check if the link is a Play Store link
                         if (isPlayStoreLink(playStoreLink)) {
                             // Open the Play Store app
@@ -67,8 +68,10 @@ public class ActivitySplash extends AppCompatActivity {
                             // Open the link using a browser
                             openLinkInBrowser(playStoreLink);
                         }
-                    } else
+                    } else {
+                        latestVersion = true;
                         checkLogin();
+                    }
                 }
             }
 
@@ -91,12 +94,10 @@ public class ActivitySplash extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-            finishAffinity();
         } else {
             // Handle if the Play Store app is not installed
             Toast.makeText(this, "Play Store app not installed", Toast.LENGTH_SHORT).show();
             openLinkInBrowser(playStoreLink);
-            finishAffinity();
         }
     }
 
@@ -106,11 +107,9 @@ public class ActivitySplash extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-            finishAffinity();
         } else {
             // Handle if no app is available to handle the link
             Toast.makeText(this, "No app available to handle the link", Toast.LENGTH_SHORT).show();
-            finishAffinity();
         }
     }
 
@@ -135,7 +134,17 @@ public class ActivitySplash extends AppCompatActivity {
     public void openWelcome(View view) {
         //navigate to welcome page
         sharedVariable.setOnSplash(false);
-        startActivity(new Intent(this, ActivityWelcome.class));
+        if(latestVersion)
+            startActivity(new Intent(this, ActivityWelcome.class));
+        else {
+            if (isPlayStoreLink(Common.newAppLink)) {
+                // Open the Play Store app
+                openPlayStore(Common.newAppLink);
+            } else {
+                // Open the link using a browser
+                openLinkInBrowser(Common.newAppLink);
+            }
+        }
     }
 
     @SuppressLint("MissingSuperCall")
