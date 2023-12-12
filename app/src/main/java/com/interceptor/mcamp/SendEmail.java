@@ -17,8 +17,8 @@ public class SendEmail {
 
     public SendEmail(String stringReceiverEmail, String title, String body) {
         try {
-            String stringSenderEmail = "interceptormcamp@gmail.com";
-            String stringPasswordSenderEmail = "eelyzsryjzqkgsry";
+            String stringSenderEmail = "test@gmail.com";
+            String stringPasswordSenderEmail = "test";
 
             String stringHost = "smtp.gmail.com";
 
