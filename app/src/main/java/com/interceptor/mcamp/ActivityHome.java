@@ -146,14 +146,12 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadPersonalDetailsImage() {
-        if (!sharedVariable.getUserImageUri().equals("unknown")) {
             profileImage = header.findViewById(R.id.profile_picture);
             if (Common.userImageBitmap == null) {
                 loadImage(new boolean[]{true});
             } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
-        }
     }
 
     private void loadImage(boolean[] run) {
@@ -165,16 +163,19 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 if (run[0]) {
                     run[0] = false;
                     if (dataSnapshot.exists()) {
-                        storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
-                            // Decode the byte array to a Bitmap
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            // Display the image in an ImageView
-                            Common.userImageBitmap = bitmap;
-                            profileImage.setImageBitmap(bitmap);
-                        });
-                    } else if (sharedVariable.getGoogle() || sharedVariable.getFacebook()) {
-                        getImageBitmap(sharedVariable.getUserImageUri());
-                        profileImage.setImageBitmap(Common.userImageBitmap);
+                        String imageUrl = String.valueOf(dataSnapshot.getValue());
+                        if (imageUrl.startsWith("displayImage/")) {
+                            storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
+                                // Decode the byte array to a Bitmap
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                // Display the image in an ImageView
+                                Common.userImageBitmap = bitmap;
+                                profileImage.setImageBitmap(bitmap);
+                            });
+                        } else {
+                            getImageBitmap(sharedVariable.getUserImageUri());
+                            profileImage.setImageBitmap(Common.userImageBitmap);
+                        }
                     }
                 }
             }
@@ -215,10 +216,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, ActivityHome.class));
         }
         if (item.getItemId() == R.id.nav_faq) {
-
-        }
-        if (item.getItemId() == R.id.nav_setting) {
-
+            startActivity(new Intent(this, ActivityFAQ.class));
         }
         if (item.getItemId() == R.id.nav_feedback) {
             startActivity(new Intent(this, ActivityFeedback.class));
@@ -227,10 +225,13 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             logOut();
         }
         if (item.getItemId() == R.id.nav_share) {
-
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Join with mCamp. New Travel Net.\nDownload now: "+Common.newAppLink);
+            startActivity(Intent.createChooser(shareIntent, "Share mCamp using"));
         }
         if (item.getItemId() == R.id.nav_rate) {
-
+            Toast.makeText(this, "Not yet available on PlayStore", Toast.LENGTH_SHORT).show();
         }
         if (!sharedVariable.getUserID().equals("unknown")) {
             if (item.getItemId() == R.id.nav_notification) {

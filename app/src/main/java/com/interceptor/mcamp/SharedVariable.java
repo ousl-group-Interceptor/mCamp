@@ -54,6 +54,14 @@ public class SharedVariable {
         mContext = activityNotification;
     }
 
+    public SharedVariable(ActivityGiveRate activityGiveRate) {
+        mContext = activityGiveRate;
+    }
+
+    public SharedVariable(Context requireContext) {
+        mContext = requireContext;
+    }
+
 
     public void setWhileLogin(String userID, String name, String email, String img, boolean google, boolean facebook) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);

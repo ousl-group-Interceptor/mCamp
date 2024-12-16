@@ -17,6 +17,7 @@ public class SendEmail {
 
     public SendEmail(String stringReceiverEmail, String title, String body) {
         try {
+
             String stringSenderEmail = "example@mail.com";
             String stringPasswordSenderEmail = "password";
 
