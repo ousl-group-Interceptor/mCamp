@@ -77,7 +77,7 @@ public class ActivityProfile extends AppCompatActivity {
                 if (run[0]) {
                     run[0] = false;
                     if (dataSnapshot.exists()) {
-                        int totalPoint = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                        String totalPoint = Objects.requireNonNull(dataSnapshot.getValue()).toString();
                         TextView coinView = findViewById(R.id.coin_count);
                         coinView.setText(totalPoint);
                     }
