@@ -91,7 +91,7 @@ public class GoogleAuthentication extends ActivitySignIn {
                     Data.child("Users/" + ID + "/name").setValue(name);
                     Data.child("Users/" + ID + "/email").setValue(email);
                     Data.child("Users/" + ID + "/password").setValue(ID);
-                    Data.child("Users/" + ID + "/userImage").setValue(String.valueOf(userImage));
+                    Data.child("Users/" + ID + "/image").setValue(String.valueOf(userImage));
                     sharedVariable.setWhileLogin(ID, name, email, String.valueOf(userImage), true, false);
                     go();
                 }

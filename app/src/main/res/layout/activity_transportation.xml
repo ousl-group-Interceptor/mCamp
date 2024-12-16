@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ActivityTransportation">
 
     <View
@@ -18,10 +19,11 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:paddingStart="15dp"
         android:paddingTop="2dp"
-        android:text="Transportation"
+        android:text="@string/transportation"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -32,48 +34,85 @@
         tools:ignore="MissingConstraints,RtlSymmetry,TextSizeCheck"
         tools:layout_editor_absoluteX="116dp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/layoutQuickAction"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
-            android:id="@+id/layoutQuickAction"
+            android:id="@+id/locations"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="680dp"
-            android:background="@color/material_dynamic_neutral20"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <ImageView
-                android:id="@+id/imageAddNote"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
-                android:contentDescription="mCamp"
-                android:src="@drawable/home" />
-
-            <ImageView
-                android:id="@+id/imageAddImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="90dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/person" />
-
-            <ImageView
-                android:id="@+id/imageAddWeb"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="100dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/baseline_search_24"
-                app:tint="@color/black" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         </LinearLayout>
 
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layoutQuickAction"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/quick_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:contentDescription="@string/home"
+            android:focusable="true"
+            android:onClick="openHome"
+            android:src="@drawable/home"
+            tools:ignore="UsingOnClickInXml,ImageContrastCheck" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <ImageView
+            android:id="@+id/imageAddImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:contentDescription="@string/app_name"
+            android:focusable="true"
+            android:onClick="openProfile"
+            android:src="@drawable/person"
+            tools:ignore="UsingOnClickInXml,DuplicateSpeakableTextCheck,ImageContrastCheck" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <ImageView
+            android:id="@+id/imageAddWeb"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:contentDescription="@string/app_name"
+            android:focusable="true"
+            android:onClick="search"
+            android:src="@drawable/baseline_search_24"
+            app:tint="@color/black"
+            tools:ignore="UsingOnClickInXml,ImageContrastCheck" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

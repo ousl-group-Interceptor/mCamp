@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ActivityHome">
 
     <com.google.android.material.navigation.NavigationView
@@ -51,7 +52,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_weight="10" />
+                    android:layout_weight="5" />
 
                 <TextView
                     android:id="@+id/home_page"
@@ -68,28 +69,35 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_weight="6" />
+                    android:layout_weight="1" />
 
                 <ImageView
-                    android:id="@+id/search"
-                    android:layout_width="0dp"
-                    android:layout_weight="5"
-                    android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/baseline_search_24"
-                    android:contentDescription="@string/searchIcon" />
-
-                <ImageView
-                    android:id="@+id/setting"
+                    android:id="@+id/home_map"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="5"
-                    android:contentDescription="@string/settingIcon"
+                    android:clickable="true"
+                    android:contentDescription="@string/map_icon"
+                    android:focusable="true"
+                    android:onClick="openSearchMap"
                     android:padding="10dp"
-                    android:src="@drawable/settings"
-                    tools:ignore="ImageContrastCheck" />
+                    android:src="@drawable/baseline_map_24"
+                    tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/home_notification"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="5"
+                    android:clickable="true"
+                    android:contentDescription="@string/searchIcon"
+                    android:focusable="true"
+                    android:onClick="openNotification"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_notifications_24"
+                    tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
 
                 <View
                     android:layout_width="0dp"

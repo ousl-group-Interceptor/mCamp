@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -83,8 +84,20 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         header = navigationView.getHeaderView(0);
         loadPersonalDetails();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_menu, menu);
 
+        // Find the menu item by ID
+        MenuItem logoutMenuItem = menu.findItem(R.id.nav_logout);
 
+        if (sharedVariable.getUserID().equals("unknown"))
+            logoutMenuItem.setTitle("Sign Up");
+        else
+            logoutMenuItem.setTitle("Logout");
+
+        return true;
     }
 
     private void loadPersonalDetails() {
@@ -95,13 +108,20 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
     private void getData(boolean[] run) {
         String ID = sharedVariable.getUserID();
-
-        Data.child("Users/" + ID + "/name").addValueEventListener(new ValueEventListener() {
+        ImageView notification = findViewById(R.id.home_notification);
+        Data.child("Users/" + ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (run[0]) {
                     run[0] = false;
-                    sharedVariable.setName(String.valueOf(dataSnapshot.getValue()));
+                    sharedVariable.setName(String.valueOf(dataSnapshot.child("name").getValue()));
+                    if(dataSnapshot.child("Notification/newNotification").exists()){
+                        if(String.valueOf(dataSnapshot.child("Notification/newNotification").getValue()).equals("true")){
+                            notification.setImageResource(R.drawable.baseline_notifications_active_24);
+                        }else
+                            notification.setImageResource(R.drawable.baseline_notifications_24);
+                    }else
+                        notification.setImageResource(R.drawable.baseline_notifications_24);
                 }
             }
 
@@ -126,14 +146,12 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadPersonalDetailsImage() {
-        if (!sharedVariable.getUserImageUri().equals("unknown")) {
             profileImage = header.findViewById(R.id.profile_picture);
             if (Common.userImageBitmap == null) {
                 loadImage(new boolean[]{true});
             } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
-        }
     }
 
     private void loadImage(boolean[] run) {
@@ -145,16 +163,19 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 if (run[0]) {
                     run[0] = false;
                     if (dataSnapshot.exists()) {
-                        storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
-                            // Decode the byte array to a Bitmap
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            // Display the image in an ImageView
-                            Common.userImageBitmap = bitmap;
-                            profileImage.setImageBitmap(bitmap);
-                        });
-                    } else if (sharedVariable.getGoogle() || sharedVariable.getFacebook()) {
-                        getImageBitmap(sharedVariable.getUserImageUri());
-                        profileImage.setImageBitmap(Common.userImageBitmap);
+                        String imageUrl = String.valueOf(dataSnapshot.getValue());
+                        if (imageUrl.startsWith("displayImage/")) {
+                            storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
+                                // Decode the byte array to a Bitmap
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                // Display the image in an ImageView
+                                Common.userImageBitmap = bitmap;
+                                profileImage.setImageBitmap(bitmap);
+                            });
+                        } else {
+                            getImageBitmap(sharedVariable.getUserImageUri());
+                            profileImage.setImageBitmap(Common.userImageBitmap);
+                        }
                     }
                 }
             }
@@ -195,22 +216,22 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, ActivityHome.class));
         }
         if (item.getItemId() == R.id.nav_faq) {
-
-        }
-        if (item.getItemId() == R.id.nav_setting) {
-
+            startActivity(new Intent(this, ActivityFAQ.class));
         }
         if (item.getItemId() == R.id.nav_feedback) {
-
+            startActivity(new Intent(this, ActivityFeedback.class));
         }
         if (item.getItemId() == R.id.nav_logout) {
             logOut();
         }
         if (item.getItemId() == R.id.nav_share) {
-
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Join with mCamp. New Travel Net.\nDownload now: "+Common.newAppLink);
+            startActivity(Intent.createChooser(shareIntent, "Share mCamp using"));
         }
         if (item.getItemId() == R.id.nav_rate) {
-
+            Toast.makeText(this, "Not yet available on PlayStore", Toast.LENGTH_SHORT).show();
         }
         if (!sharedVariable.getUserID().equals("unknown")) {
             if (item.getItemId() == R.id.nav_notification) {
@@ -262,6 +283,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     public void openTravelPlaces(View view) {
+        startActivity(new Intent(this, ActivityTravelPlace.class));
     }
 
     @Override
@@ -270,11 +292,22 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     }
 
     public void openHandyCrafts(View view) {
+        startActivity(new Intent(this, ActivityHandyCrafts.class));
     }
 
     public void openTransportation(View view) {
+        startActivity(new Intent(this, ActivityTransportation.class));
     }
 
     public void openAccommodation(View view) {
+        startActivity(new Intent(this, ActivityAccommodation.class));
+    }
+
+    public void openNotification(View view) {
+        startActivity(new Intent(this, ActivityNotification.class));
+    }
+
+    public void openSearchMap(View view) {
+        startActivity(new Intent(this, ActivityMapSearchLocation.class));
     }
 }

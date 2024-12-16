@@ -1,0 +1,9 @@
+<!-- res/color/rating_bar_color.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Default state -->
+    <item android:color="#FFD700" android:state_pressed="false" android:state_selected="false"/>
+    <!-- Pressed state -->
+    <item android:color="#FFD700" android:state_pressed="true"/>
+    <!-- Selected state -->
+    <item android:color="#FFD700" android:state_selected="true"/>
+</selector>

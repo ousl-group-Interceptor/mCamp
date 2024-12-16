@@ -28,9 +28,9 @@ import java.util.Objects;
 
 public class ActivitySignUp extends AppCompatActivity {
 
-    TextInputEditText name, email, password, cPassword;
+    private TextInputEditText name, email, password, cPassword;
     private DatabaseReference Data;
-    EmailManager emailManager;
+    private EmailManager emailManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

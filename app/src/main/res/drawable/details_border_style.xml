@@ -7,7 +7,7 @@
 
     <!-- Background Color -->
     <solid
-        android:color="@android:color/transparent" />
+        android:color="#F0E8E8" />
 
     <!-- Corner Radius -->
     <corners

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 public class SharedVariable {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_USER_ID = "UserID";
+    private static final String KEY_ON_SPLASH = "OnSplash";
     private static final String KEY_Email = "Email";
     private static final String KEY_SIGNIN_Email = "SignInEmail";
     private static final String KEY_SIGNIN_PASSWORD = "SignInPassword";
@@ -45,6 +46,22 @@ public class SharedVariable {
         mContext = activityProfile;
     }
 
+    public SharedVariable(ActivityTravelPlace activityTravelPlace) {
+        mContext = activityTravelPlace;
+    }
+
+    public SharedVariable(ActivityNotification activityNotification) {
+        mContext = activityNotification;
+    }
+
+    public SharedVariable(ActivityGiveRate activityGiveRate) {
+        mContext = activityGiveRate;
+    }
+
+    public SharedVariable(Context requireContext) {
+        mContext = requireContext;
+    }
+
 
     public void setWhileLogin(String userID, String name, String email, String img, boolean google, boolean facebook) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -78,6 +95,18 @@ public class SharedVariable {
     public boolean getFacebook() {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(KEY_Facebook, false);
+    }
+
+    public boolean getOnSplash() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_ON_SPLASH, true);
+    }
+
+    public void setOnSplash(boolean isOnSplash) {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(KEY_ON_SPLASH, isOnSplash);
+        editor.apply();
     }
 
     public String getEmail() {

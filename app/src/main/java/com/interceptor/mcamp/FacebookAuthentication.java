@@ -72,11 +72,11 @@ public class FacebookAuthentication extends ActivitySignIn {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // Sign in success, update UI with the signed-in user_icon's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         assert user != null;
                         updateUI(user, new boolean[]{true});
-                    }  // If sign in fails, display a message to the user.
+                    }  // If sign in fails, display a message to the user_icon.
 
                 });
     }
@@ -100,7 +100,7 @@ public class FacebookAuthentication extends ActivitySignIn {
                     Data.child("Users/" + ID + "/name").setValue(user.getDisplayName());
                     Data.child("Users/" + ID + "/email").setValue(user.getEmail());
                     String userImage = String.valueOf(user.getPhotoUrl());
-                    Data.child("Users/" + ID + "/userImage").setValue(userImage);
+                    Data.child("Users/" + ID + "/image").setValue(userImage);
                     sharedVariable.setWhileLogin(ID, user.getDisplayName(), user.getEmail(), userImage, false, true);
                     go();
                 }

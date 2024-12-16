@@ -1,7 +1,6 @@
 package com.interceptor.mcamp;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +33,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.Objects;
+
 public class ActivityProfile extends AppCompatActivity {
 
     private ImageView profileImage;
@@ -65,6 +66,29 @@ public class ActivityProfile extends AppCompatActivity {
         loadImage();
         loadName();
         loadEmail();
+        loadCoin(new boolean[]{true});
+    }
+
+    private void loadCoin(boolean[] run) {
+        String path = "Users/" + sharedVariable.getUserID() + "/Points";
+        Data.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (run[0]) {
+                    run[0] = false;
+                    if (dataSnapshot.exists()) {
+                        int totalPoint = Integer.parseInt(Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                        TextView coinView = findViewById(R.id.coin_count);
+                        coinView.setText(totalPoint);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void loadEmail() {
@@ -76,13 +100,11 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     private void loadImage() {
-        if (!sharedVariable.getUserImageUri().equals("unknown")) {
             if (Common.userImageBitmap == null) {
                 loadImage(new boolean[]{true});
             } else {
                 profileImage.setImageBitmap(Common.userImageBitmap);
             }
-        }
     }
 
     private void loadImage(boolean[] run) {
@@ -94,16 +116,19 @@ public class ActivityProfile extends AppCompatActivity {
                 if (run[0]) {
                     run[0] = false;
                     if (dataSnapshot.exists()) {
-                        storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
-                            // Decode the byte array to a Bitmap
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            // Display the image in an ImageView
-                            Common.userImageBitmap = bitmap;
-                            profileImage.setImageBitmap(bitmap);
-                        });
-                    } else if (sharedVariable.getGoogle() || sharedVariable.getFacebook()) {
-                        getImageBitmap(sharedVariable.getUserImageUri());
-                        profileImage.setImageBitmap(Common.userImageBitmap);
+                        String imageUrl = String.valueOf(dataSnapshot.getValue());
+                        if (imageUrl.startsWith("displayImage/")) {
+                            storageRef.child(String.valueOf(dataSnapshot.getValue())).getBytes(Long.MAX_VALUE).addOnSuccessListener(bytes -> {
+                                // Decode the byte array to a Bitmap
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                // Display the image in an ImageView
+                                Common.userImageBitmap = bitmap;
+                                profileImage.setImageBitmap(bitmap);
+                            });
+                        } else {
+                            getImageBitmap(sharedVariable.getUserImageUri());
+                            profileImage.setImageBitmap(Common.userImageBitmap);
+                        }
                     }
                 }
             }
@@ -181,7 +206,6 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     public void changeName(View view) {
-        Context context = this;
         PopupWindow popupWindow;
         // Inflate the popup window layout
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_change_name, null);
@@ -211,7 +235,7 @@ public class ActivityProfile extends AppCompatActivity {
                 });
             } else {
                 Common.stopLoading();
-                Common.showMessage(context, "Error!", "Please enter your name");
+                Common.showMessage(this, "Error!", "Please enter your name");
             }
         });
 
@@ -226,9 +250,11 @@ public class ActivityProfile extends AppCompatActivity {
     }
 
     public void openMyReview(View view) {
+        startActivity(new Intent(this, ActivityMyReviews.class));
     }
 
     public void openMyLocation(View view) {
+        startActivity(new Intent(this, ActivityMyContribution.class));
     }
 
     @SuppressLint("MissingSuperCall")

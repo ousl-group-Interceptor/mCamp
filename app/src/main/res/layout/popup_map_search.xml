@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#CAFFFFFF">
+
+    <EditText
+        android:id="@+id/keyWordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/if_you_know_name_enter_here"
+        android:inputType="text"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textColorHint="#5E5E5E"
+        tools:ignore="VisualLintTextFieldSize"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/radiusEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/how_much_km_can_you_go_from_pinpoint"
+        android:inputType="number"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textColorHint="#5E5E5E"
+        tools:ignore="VisualLintTextFieldSize"
+        android:autofillHints="" />
+
+    <Spinner
+        android:id="@+id/searchSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FF0000"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/cancel"
+            android:textColor="#000000"
+            tools:ignore="ButtonOrder,ButtonStyle" />
+
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00FF00"
+            android:textColor="#000000"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/search"
+            android:layout_marginStart="8dp"
+            tools:ignore="ButtonOrder,ButtonStyle" />
+    </LinearLayout>
+
+</LinearLayout>
